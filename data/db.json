@@ -1,0 +1,120 @@
+{
+    "rates": [
+        {
+            "id": 1,
+            "rate": 10,
+            "label": "Dev: Std"
+        },
+        {
+            "id": 2,
+            "rate": 20,
+            "label": "Dev: AfterHrs"
+        },
+        {
+            "id": 3,
+            "rate": 30,
+            "label": "FilmShoot"
+        }
+    ],
+    "clients": [
+        {
+            "id": 1,
+            "name": "Make Inc"
+        },
+        {
+            "id": 2,
+            "name": "JayVay"
+        },
+        {
+            "id": 3,
+            "name": "Acmecorp"
+        }
+    ],
+    "projects": [
+        {
+            "id": 1,
+            "name": "Make Inc Website"
+        },
+        {
+            "id": 2,
+            "name": "JayVay widget"
+        },
+        {
+            "id": 3,
+            "name": "Acmecorp App"
+        },
+        {
+            "id": 4,
+            "name": "Acmecorp Video"
+        },
+        {
+            "id": 5,
+            "name": "Acmecorp Email"
+        }
+    ],
+    "log": [
+        {
+            "id": 1,
+            "project": "Make Inc Website",
+            "details": "Added a thing",
+            "client": "Make Inc",
+            "rate": 10,
+            "startTime": "2022-09-15T11:30:00.000Z",
+            "endTime": "2022-09-15T14:30:00.000Z"
+        },
+        {
+            "id": 2,
+            "project": "JayVay widget",
+            "details": "Edited colors",
+            "client": "JayVay",
+            "rate": 10,
+            "startTime": "2022-09-17T14:30:00.000Z",
+            "endTime": "2022-09-17T16:30:00.000Z"
+        },
+        {
+            "id": 3,
+            "project": "Acmecorp App",
+            "details": "Prototype development",
+            "client": "Acmecorp",
+            "rate": 10,
+            "startTime": "2022-09-10T09:30:00.000Z",
+            "endTime": "2022-09-10T18:30:00.000Z"
+        },
+        {
+            "id": 4,
+            "project": "Acmecorp Email",
+            "details": "Compiled email as per design",
+            "client": "Acmecorp",
+            "rate": 20,
+            "startTime": "2022-09-20T14:30:00.000Z",
+            "endTime": "2022-09-20T16:00:00.000Z"
+        },
+        {
+            "id": 5,
+            "project": "Acmecorp Email",
+            "details": "email design",
+            "client": "Acmecorp",
+            "rate": 20,
+            "startTime": "2022-09-20T10:30:00.000Z",
+            "endTime": "2022-09-20T11:00:00.000Z"
+        },
+        {
+            "id": 6,
+            "project": "JayVay widget",
+            "details": "widget design",
+            "client": "JayVay",
+            "rate": 20,
+            "startTime": "2022-09-20T17:30:00.000Z",
+            "endTime": "2022-09-20T18:00:00.000Z"
+        },
+        {
+            "id": 7,
+            "project": "Acmecorp Email",
+            "details": "email design",
+            "client": "Acmecorp",
+            "rate": 10,
+            "startTime": "2022-09-15T15:30:00.000Z",
+            "endTime": "2022-09-15T17:30:00.000Z"
+        }
+    ]
+}

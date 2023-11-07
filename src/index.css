@@ -1,0 +1,312 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --colTeal: #268c6a;
+  --colTealLight: #64aa93;
+  --colTealDark: #1e6950;
+  --colBlue: #2f3b68;
+  --colBlueLighter: #d8dff8;
+  --colBlueLight: #616fa5;
+  --colBlueDark: #2d3349;
+  --colRed: #d23535;
+  --colRedLight: #d37d7d;
+  --colRedDark: #a72c2c;
+  --colYellow: #f9ee4f;
+  --colYellowLight: #fff9b5;
+  --colYellowDark: #d4c816;
+  --colCyan: #97f4b9;
+  --colCyanLight: #d6fce4;
+  --colCyanDark: #72b98c;
+  --colGrey: #9e9e9e;
+  --colGreyLight: #b9b9b9;
+  --colGreyLighter: #e7e7e7;
+  --colGreyDark: #7a7a7a;
+}
+
+#colorPalette {
+  display: flex;
+  flex-direction: row;
+}
+.colorblock {
+  width: 20px;
+  height: 20px;
+}
+
+#cb1 {
+  background-color: var(--colTeal);
+}
+#cb2 {
+  background-color: var(--colTealLight);
+}
+#cb3 {
+  background-color: var(--colTealDark);
+}
+#cb4 {
+  background-color: var(--colBlue);
+}
+#cb5 {
+  background-color: var(--colBlueLight);
+}
+#cb6 {
+  background-color: var(--colBlueDark);
+}
+#cb7 {
+  background-color: var(--colRed);
+}
+#cb8 {
+  background-color: var(--colRedLight);
+}
+#cb9 {
+  background-color: var(--colRedDark);
+}
+#cb10 {
+  background-color: var(--colYellow);
+}
+#cb11 {
+  background-color: var(--colYellowLight);
+}
+#cb12 {
+  background-color: var(--colYellowDark);
+}
+#cb13 {
+  background-color: var(--colCyan);
+}
+#cb14 {
+  background-color: var(--colCyanLight);
+}
+#cb15 {
+  background-color: var(--colCyanDark);
+}
+#cb16 {
+  background-color: var(--colGrey);
+}
+#cb17 {
+  background-color: var(--colGreyLighter);
+}
+#cb18 {
+  background-color: var(--colGreyLight);
+}
+#cb19 {
+  background-color: var(--colGreyDark);
+}
+
+html {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 18px;
+}
+
+header {
+  background-color: var(--colTealDark);
+  padding: 0 10px;
+  color: white;
+  width: 100%;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+
+a {
+  color: var(--colRed);
+}
+
+body {
+  background-image: linear-gradient(to bottom, var(--colGreyLighter), white);
+  height: 100%;
+}
+
+/* footer {
+  background-color: var(--colTealDark);
+  height: 50px;
+  margin-top: 50px;
+} 
+ nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.navItem {
+  padding: 0 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.navItem:hover {
+  background-color: white;
+  cursor: pointer;
+} */
+
+#toolbox {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
+  justify-content: space-between;
+}
+
+#toolboxRight {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 10px;
+}
+
+.stackItem {
+  background-color: var(--colGreyLighter);
+  margin: 0 5px;
+}
+.stackItemHeader {
+  background-color: var(--colTeal);
+  color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 30px;
+  font-weight: bold;
+  padding: 5px;
+}
+.stackList {
+  padding: 5px;
+  overflow: auto;
+}
+
+/* ENTRY BLOCKS ================ */
+
+.entryContainer {
+  padding: 10px;
+  min-width: 600px;
+  border-radius: 8px;
+  margin: 10px auto;
+  background-color: white;
+  box-shadow: 0 3px 18px var(--colGreyLight);
+  color: var(--colBlue);
+}
+
+#addProjectContainer {
+  display: none;
+}
+#addClientContainer {
+  display: none;
+}
+#addRateContainer {
+  display: none;
+}
+
+.entryHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: var(--colTealLight);
+  justify-content: space-between;
+  padding: 5px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+/* =============================== */
+
+#logForm {
+  display: flex;
+  flex-direction: column;
+}
+
+.clientName {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.utility {
+  background-color: #a4caca;
+}
+
+#timeBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 5px;
+}
+
+#totalHours {
+  padding: 20px;
+  border: 2px solid var(--colBlue);
+  background-color: var(--colCyanLight);
+  border-radius: 5px;
+  height: 100%;
+  font-weight: bold;
+  color: var(--colBlue);
+}
+
+.mainButton {
+  margin: 20px auto;
+  width: 100%;
+  height: 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-color: var(--colBlue);
+  color: white;
+  border-radius: 5px;
+}
+
+.re-heading {
+  width: 90%;
+  margin: 0 auto;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--colTealDark);
+}
+
+/* TABLE STYLES ================ */
+
+.re-table {
+  border-collapse: collapse;
+  display: block;
+  margin: 30px auto;
+  min-width: 400px;
+  width: 90%;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  color: var(--colBlue);
+  font-size: 0.8rem;
+}
+
+.re-table tr {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.re-table thead tr {
+  background-color: var(--colTealDark);
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.re-table th,
+.re-table td {
+  padding: 0.3rem;
+}
+
+.re-dateRow {
+  border-top: 2px solid var(--colCyanDark);
+  color: var(--colCyanDark);
+  font-size: 0.6rem;
+  font-weight: bold;
+  background-color: var(--colCyanLight);
+}
+
+.re-col-narrow {
+  width: 5%;
+}
+
+.re-totalsRow {
+  border-top: 3px solid var(--colTealDark);
+  color: var(--colTealDark);
+  font-weight: bold;
+  font-size: 1.2rem;
+}
