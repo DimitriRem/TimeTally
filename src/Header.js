@@ -8,7 +8,8 @@ const Header = ({ date }) => {
         <span className="material-symbols-outlined">monetization_on</span>{" "}
         TimeTally
       </h1>
-      {date}
+
+      <div id="headerRight">{date}</div>
     </header>
   );
 };

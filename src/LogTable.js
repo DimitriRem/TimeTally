@@ -17,12 +17,6 @@ const LogTable = ({ items }) => {
     return groupedLogs;
   };
 
-  /////////////////
-  // const endDate = new Date(log.endTime);
-  // const differenceInMilliseconds = Math.abs(endDate - startDate);
-  // const numberOfHours = differenceInMilliseconds / (1000 * 60 * 60);
-  ////////////////
-
   // Render the table
   const renderTable = () => {
     const sortedLogs = items.sort(
