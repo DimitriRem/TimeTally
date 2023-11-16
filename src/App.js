@@ -1,5 +1,8 @@
 import Header from "./Header";
 import TimeEntry from "./TimeEntry";
+import AddNewProject from "./AddNewProject";
+import AddNewClient from "./AddNewClient";
+import AddNewRate from "./AddNewRate";
 import LogTable from "./LogTable";
 import { useState, useEffect } from "react";
 import apiRequest from "./apiRequest";
@@ -21,6 +24,9 @@ function App() {
   const [newItem, setNewItem] = useState("");
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [newProjectDetails, setNewProjectDetails] = useState("");
+  const [newClientDetails, setNewClientDetails] = useState("");
+  const [newRateDetails, setNewRateDetails] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,7 +74,6 @@ function App() {
   }, []);
 
   const addItem = async (item) => {
-    const id = items.length ? items[items.length - 1].id + 1 : 1;
     const listItems = [...items, newItem];
     setItems(listItems);
 
@@ -84,8 +89,88 @@ function App() {
     if (result) setFetchError(result);
   };
 
+  const addProject = async (project) => {
+    const listProjects = [...projects, newProjectDetails];
+    setProjects(listProjects);
+    setAddNewProjectIsVisible(false);
+
+    const postOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newProjectDetails),
+    };
+
+    const result = await apiRequest(API_URL + "projects/", postOptions);
+    if (result) setFetchError(result);
+  };
+
+  const addClient = async (client) => {
+    const listClients = [...clients, newClientDetails];
+    setClients(listClients);
+    setAddNewClientIsVisible(false);
+
+    const postOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newClientDetails),
+    };
+
+    const result = await apiRequest(API_URL + "clients/", postOptions);
+    if (result) setFetchError(result);
+  };
+
+  const addRate = async (rate) => {
+    const listRates = [...rates, newRateDetails];
+    setRates(listRates);
+    setAddNewRateIsVisible(false);
+
+    const postOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newRateDetails),
+    };
+
+    const result = await apiRequest(API_URL + "rates/", postOptions);
+    if (result) setFetchError(result);
+  };
+
+  const [addNewProjectIsVisible, setAddNewProjectIsVisible] = useState(false);
+
+  const addNewProjectPop = () => {
+    setAddNewProjectIsVisible(true);
+  };
+  const addNewProjectClose = () => {
+    setAddNewProjectIsVisible(false);
+  };
+
+  const [addNewClientIsVisible, setAddNewClientIsVisible] = useState(false);
+
+  const addNewClientPop = () => {
+    setAddNewClientIsVisible(true);
+  };
+  const addNewClientClose = () => {
+    setAddNewClientIsVisible(false);
+  };
+
+  const [addNewRateIsVisible, setAddNewRateIsVisible] = useState(false);
+
+  const addNewRatePop = () => {
+    setAddNewRateIsVisible(true);
+  };
+  const addNewRateClose = () => {
+    setAddNewRateIsVisible(false);
+  };
+
   const handleSubmit = (newItem) => {
-    if (!newItem) return;
+    if (!newItem) {
+      return;
+    }
     addItem(newItem);
     setNewItem("");
   };
@@ -101,6 +186,37 @@ function App() {
             newItem={newItem}
             setNewItem={setNewItem}
             handleSubmit={handleSubmit}
+            addNewProjectPop={addNewProjectPop}
+            addNewRatePop={addNewRatePop}
+          />
+        )}
+        {addNewProjectIsVisible && (
+          <AddNewProject
+            addProject={addProject}
+            clients={clients}
+            setClients={setClients}
+            addNewProjectClose={addNewProjectClose}
+            newProjectDetails={newProjectDetails}
+            setNewProjectDetails={setNewProjectDetails}
+            addNewClientPop={addNewClientPop}
+          />
+        )}
+        {addNewClientIsVisible && (
+          <AddNewClient
+            addClient={addClient}
+            clients={clients}
+            setClients={setClients}
+            addNewClientClose={addNewClientClose}
+            newClientDetails={newClientDetails}
+            setNewClientDetails={setNewClientDetails}
+          />
+        )}
+        {addNewRateIsVisible && (
+          <AddNewRate
+            addRate={addRate}
+            addNewRateClose={addNewRateClose}
+            newRateDetails={newRateDetails}
+            setNewRateDetails={setNewRateDetails}
           />
         )}
       </div>

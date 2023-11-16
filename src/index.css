@@ -187,13 +187,19 @@ body {
 }
 
 #addProjectContainer {
-  display: none;
+  position: relative;
+  top: -280px;
+  box-shadow: 0 3px 18px var(--colGreyLight), 0 0 50px 50px white;
 }
 #addClientContainer {
-  display: none;
+  position: relative;
+  top: -560px;
+  box-shadow: 0 3px 18px var(--colGreyLight), 0 0 50px 50px white;
 }
 #addRateContainer {
-  display: none;
+  position: relative;
+  top: -280px;
+  box-shadow: 0 3px 18px var(--colGreyLight), 0 0 50px 50px white;
 }
 
 .entryHeader {

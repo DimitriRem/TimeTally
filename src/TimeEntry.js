@@ -2,7 +2,15 @@ import React, { useState, useEffect } from "react";
 import ProjectOption from "./ProjectOption";
 import RateOption from "./RateOption";
 
-const TimeEntry = ({ projects, rates, handleSubmit, newItem, setNewItem }) => {
+const TimeEntry = ({
+  projects,
+  rates,
+  handleSubmit,
+  newItem,
+  setNewItem,
+  addNewProjectPop,
+  addNewRatePop,
+}) => {
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [currentRateIndex, setCurrentRateIndex] = useState(0);
   const [startTime, setStartTime] = useState("");
@@ -20,9 +28,9 @@ const TimeEntry = ({ projects, rates, handleSubmit, newItem, setNewItem }) => {
   let matchingRateIndex = -2;
 
   const handleProjectOptionChange = (event) => {
-    const selectedValue = Number(event.target.value); ////ll
-    if (selectedValue === "addProject") {
-      // Code to add a new project
+    const selectedValue = Number(event.target.value);
+    if (selectedValue === -2) {
+      addNewProjectPop();
     } else {
       matchingProjectIndex = projects.findIndex(
         (project) => project.id === selectedValue
@@ -34,24 +42,21 @@ const TimeEntry = ({ projects, rates, handleSubmit, newItem, setNewItem }) => {
 
   const handleRateOptionChange = (event) => {
     const selectedValue = Number(event.target.value);
-    if (selectedValue === "addRate") {
-      // Code to add a new project
+    if (selectedValue === -2) {
+      addNewRatePop();
     } else {
       matchingRateIndex = rates.findIndex((rate) => rate.id === selectedValue);
 
       setCurrentRateIndex(matchingRateIndex);
-      //handleTotalsChange();
     }
   };
 
   const handleStartTimeChange = (event) => {
     setStartTime(event.target.value);
-    //handleTotalsChange();
   };
 
   const handleEndTimeChange = (event) => {
     setEndTime(event.target.value);
-    //handleTotalsChange();
   };
 
   const handleDetailsChange = (event) => {
@@ -80,8 +85,7 @@ const TimeEntry = ({ projects, rates, handleSubmit, newItem, setNewItem }) => {
     }
   }, [totalHours, currentRateIndex]);
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
     setNewItem({
       project: projects[currentProjectIndex].name,
       details: details,
@@ -90,6 +94,10 @@ const TimeEntry = ({ projects, rates, handleSubmit, newItem, setNewItem }) => {
       startTime: finalStartTime,
       endTime: finalEndTime,
     });
+  }, [details]);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
     handleSubmit(newItem);
   };
 
@@ -107,10 +115,10 @@ const TimeEntry = ({ projects, rates, handleSubmit, newItem, setNewItem }) => {
             </div>
           </div>
           <div id="projectSelector">
-            or
+            or{" "}
             <select name="project" onChange={handleProjectOptionChange}>
               <option value="null">Another Project</option>
-              <option value="addProject" className="utility">
+              <option value="-2" className="utility">
                 + Add a new Project
               </option>
               {projects.map((project) => (
@@ -154,7 +162,7 @@ const TimeEntry = ({ projects, rates, handleSubmit, newItem, setNewItem }) => {
                   label={rate.label}
                 />
               ))}
-              <option value="addRate" className="utility">
+              <option value="-2" className="utility">
                 Add a new rate
               </option>
             </select>
