@@ -222,7 +222,9 @@ function App() {
       </div>
       {isLoading && <p>Loading items...</p>}
       {fetchError && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
-      {!fetchError && !isLoading && <LogTable items={items} />}
+      {!fetchError && !isLoading && (
+        <LogTable items={items} API_URL={API_URL} />
+      )}
     </>
   );
 }

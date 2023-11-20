@@ -127,29 +127,6 @@ body {
   background-image: linear-gradient(to bottom, var(--colGreyLighter), white);
   height: 100%;
 }
-
-/* footer {
-  background-color: var(--colTealDark);
-  height: 50px;
-  margin-top: 50px;
-} 
- nav {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-evenly;
-}
-
-.navItem {
-  padding: 0 1rem;
-  font-size: 1.1rem;
-  font-weight: bold;
-}
-.navItem:hover {
-  background-color: white;
-  cursor: pointer;
-} */
-
 #toolbox {
   width: 90%;
   margin: 0 auto;
@@ -257,6 +234,18 @@ body {
   background-color: var(--colBlue);
   color: white;
   border-radius: 5px;
+  cursor: pointer;
+}
+
+.deleteButton {
+  margin: 20px auto;
+  width: 80%;
+  height: 30px;
+  font-size: 0.8rem;
+  background-color: var(--colRedDark);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .re-heading {
@@ -314,4 +303,34 @@ body {
   color: var(--colTealDark);
   font-weight: bold;
   font-size: 1.2rem;
+}
+
+.edit {
+  cursor: pointer;
+}
+
+.rowButton {
+  cursor: pointer;
+}
+.deleteCancel {
+  cursor: pointer;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+.deleteConfirm {
+  background-color: var(--colRedLight);
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+
+.confirmButton {
+  margin: 5px;
+  color: white;
+  background-color: var(--colRedDark);
+  border: 1px solid white;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
 }
