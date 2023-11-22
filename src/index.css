@@ -309,6 +309,10 @@ body {
   cursor: pointer;
 }
 
+.updateDetailsTd {
+  background-color: white;
+}
+
 .rowButton {
   cursor: pointer;
 }

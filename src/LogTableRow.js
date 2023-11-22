@@ -15,9 +15,16 @@ const LogTableRow = ({
   const differenceInMilliseconds = Math.abs(endDate - startDate);
   const numberOfHours = differenceInMilliseconds / (1000 * 60 * 60);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
   const handleDelete = () => {
     setIsDeleteModalOpen(true);
   };
+
+  const handleEdit = () => {
+    setIsEditModalOpen(true);
+  };
+
   const confirmDelete = () => {
     // Perform the delete operation here
     deleteEntry(id);
@@ -26,6 +33,10 @@ const LogTableRow = ({
   };
   const cancelDelete = () => {
     setIsDeleteModalOpen(false);
+  };
+
+  const cancelEdit = () => {
+    setIsEditModalOpen(false);
   };
   const deleteEntry = (id) => {
     fetch(`${API_URL}log/${id}`, {
@@ -58,7 +69,12 @@ const LogTableRow = ({
 
         <td>${numberOfHours * rate}</td>
         <td>
-          <span className="material-symbols-outlined rowButton">edit</span>
+          <span
+            className="material-symbols-outlined rowButton"
+            onClick={handleEdit}
+          >
+            edit
+          </span>
           <span
             className="material-symbols-outlined rowButton"
             onClick={handleDelete}
@@ -81,6 +97,57 @@ const LogTableRow = ({
             </button>
             <span className="deleteCancel" onClick={cancelDelete}>
               No, cancel.
+            </span>
+          </td>
+        </tr>
+      )}
+      {isEditModalOpen && (
+        <tr>
+          <td colSpan="9" className="updateDetailsTd">
+            <h2>
+              Edit details for above entry{" "}
+              <span className="material-symbols-outlined">arrow_upward</span>
+            </h2>
+            <form>
+              <label htmlFor="projectName">Project Name: </label>
+              <input
+                type="text"
+                id="projectName"
+                name="projectName"
+                value={project}
+              />
+              <br /> <label htmlFor="projectDetails">Details: </label>
+              <input
+                type="text"
+                id="projectDetails"
+                name="projectDetails"
+                value={details}
+              />
+              <br />
+              <label htmlFor="rate">Rate: </label>
+              <select id="rate" name="rate">
+                <option value="-2" className="utility">
+                  Add a new rate
+                </option>
+              </select>
+              <br />
+              <label htmlFor="startTime">Start time: </label>
+              <input type="time" id="startTime" name="startTime" required />
+              <input type="date" />
+              <br />
+              <label htmlFor="endTime">End time: </label>
+              <input type="time" id="endTime" name="endTime" required />
+              <br />
+              <button
+                type="submit"
+                id="updateentryButton"
+                className="mainButton"
+              >
+                Update
+              </button>
+            </form>
+            <span className="deleteCancel" onClick={cancelEdit}>
+              Cancel
             </span>
           </td>
         </tr>
