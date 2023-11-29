@@ -223,7 +223,12 @@ function App() {
       {isLoading && <p>Loading items...</p>}
       {fetchError && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
       {!fetchError && !isLoading && (
-        <LogTable items={items} API_URL={API_URL} />
+        <LogTable
+          items={items}
+          API_URL={API_URL}
+          rates={rates}
+          projects={projects}
+        />
       )}
     </>
   );

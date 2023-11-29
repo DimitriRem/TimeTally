@@ -2,7 +2,7 @@ import React from "react";
 import LogTableRow from "./LogTableRow";
 
 // Assuming you have an array of logs named 'items'
-const LogTable = ({ items, API_URL }) => {
+const LogTable = ({ items, API_URL, rates, projects }) => {
   // Function to group logs by date
   const groupLogsByDate = (items) => {
     const groupedLogs = {};
@@ -76,6 +76,8 @@ const LogTable = ({ items, API_URL }) => {
                         startTime={log.startTime}
                         endTime={log.endTime}
                         API_URL={API_URL}
+                        rates={rates}
+                        projects={projects}
                       />
                     </React.Fragment>
                   );
@@ -92,6 +94,8 @@ const LogTable = ({ items, API_URL }) => {
                       startTime={log.startTime}
                       endTime={log.endTime}
                       API_URL={API_URL}
+                      rates={rates}
+                      projects={projects}
                     />
                   );
                 }

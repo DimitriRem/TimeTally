@@ -37,6 +37,10 @@
     {
       "name": "ClientNew",
       "id": 4
+    },
+    {
+      "name": "New Client 2",
+      "id": 5
     }
   ],
   "projects": [
@@ -69,6 +73,11 @@
       "name": "jayvayp2",
       "client": "JayVay",
       "id": 6
+    },
+    {
+      "name": "new proj 2",
+      "client": "New Client 2",
+      "id": 7
     }
   ],
   "log": [
@@ -163,12 +172,12 @@
       "id": 23
     },
     {
-      "project": "jayvayp2",
-      "details": "some test",
-      "client": "JayVay",
-      "rate": "12",
-      "startTime": "2023-11-20T09:00:00.000Z",
-      "endTime": "2023-11-20T11:00:00.000Z",
+      "project": "new proj 2",
+      "details": "checking time. Entered 12-13\n",
+      "client": "New Client 2",
+      "rate": 10,
+      "startTime": "2023-11-29T10:00:00.000Z",
+      "endTime": "2023-11-29T11:00:00.000Z",
       "id": 24
     }
   ]

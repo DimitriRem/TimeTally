@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import RateOption from "./RateOption";
+import ProjectOption from "./ProjectOption";
 
 const LogTableRow = ({
   id,
@@ -9,6 +11,8 @@ const LogTableRow = ({
   startTime,
   endTime,
   API_URL,
+  rates,
+  projects,
 }) => {
   const startDate = new Date(startTime);
   const endDate = new Date(endTime);
@@ -16,6 +20,13 @@ const LogTableRow = ({
   const numberOfHours = differenceInMilliseconds / (1000 * 60 * 60);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [updatedProjectIndex, setUpdatedProjectIndex] = useState("");
+  const [updatedProjectDetails, setUpdatedProjectDetails] = useState("");
+  const [updatedProjectRateIndex, setUpdatedProjectRateIndex] = useState("");
+  const [updatedProjectStartTime, setUpdatedProjectStartTime] = useState("");
+  const [updatedProjectDate, setUpdatedProjectDate] = useState("");
+  const [updatedProjectEndTime, setUpdatedProjectEndTime] = useState("");
+  const [updatedItem, setUpdatedItem] = useState({});
 
   const handleDelete = () => {
     setIsDeleteModalOpen(true);
@@ -35,6 +46,9 @@ const LogTableRow = ({
     setIsDeleteModalOpen(false);
   };
 
+  let currentProjectId = projects.findIndex((proj) => proj.name === project);
+  let currentRateId = rates.findIndex((rat) => rat.rate === rate);
+
   const cancelEdit = () => {
     setIsEditModalOpen(false);
   };
@@ -43,6 +57,61 @@ const LogTableRow = ({
       method: "DELETE",
     });
   };
+
+  const handleEntryUpdate = (e) => {
+    e.preventDefault();
+    handleUpdate(updatedItem);
+  };
+
+  const handleProjectUpdate = (event) => {
+    const selectedValue = Number(event.target.value);
+    if (selectedValue === -2) {
+      addNewProjectPop();
+    } else {
+      currentProjectId = projects.findIndex(
+        (proj) => proj.id === selectedValue
+      );
+
+      setUpdatedProjectIndex(currentProjectId);
+    }
+  };
+
+  const handleDetailsUpdate = (event) => {
+    setUpdatedProjectDetails(event.target.value);
+  };
+
+  const handleRateUpdate = (event) => {
+    const selectedValue = Number(event.target.value);
+    if (selectedValue === -2) {
+      addNewRatePop();
+    } else {
+      currentRateId = rates.findIndex((rat) => rat.id === selectedValue);
+      setUpdatedProjectRateIndex(currentRateId);
+    }
+  };
+
+  const handleStartTimeUpdate = (event) => {
+    setUpdatedProjectStartTime(event.target.value);
+  };
+
+  const handleEndTimeUpdate = (event) => {
+    setUpdatedProjectEndTime(event.target.value);
+  };
+
+  const handleDateUpdate = (event) => {
+    setUpdatedProjectDate(event.target.value);
+  };
+
+  useEffect(() => {
+    setUpdatedItem({
+      project: projects[updatedProjectIndex].name,
+      details: updatedProjectDetails,
+      client: projects[updatedProjectIndex].client,
+      rate: rates[updatedProjectRateIndex].rate,
+      startTime: updatedProjectStartTime,
+      endTime: updatedProjectEndTime,
+    });
+  }, [details]);
 
   return (
     <React.Fragment>
@@ -83,6 +152,7 @@ const LogTableRow = ({
           </span>
         </td>
       </tr>
+
       {isDeleteModalOpen && (
         <tr>
           <td colSpan="7" className="deleteConfirm">
@@ -101,6 +171,7 @@ const LogTableRow = ({
           </td>
         </tr>
       )}
+
       {isEditModalOpen && (
         <tr>
           <td colSpan="9" className="updateDetailsTd">
@@ -108,35 +179,88 @@ const LogTableRow = ({
               Edit details for above entry{" "}
               <span className="material-symbols-outlined">arrow_upward</span>
             </h2>
-            <form>
+            <form className="editForm" onSubmit={handleEntryUpdate}>
               <label htmlFor="projectName">Project Name: </label>
-              <input
-                type="text"
-                id="projectName"
-                name="projectName"
-                value={project}
-              />
+              <select
+                name="project"
+                defaultValue={currentProjectId + 1}
+                onChange={handleProjectUpdate}
+              >
+                <option value="null">Another Project</option>
+                <option value="-2" className="utility">
+                  + Add a new Project
+                </option>
+                {projects.map((project) => (
+                  <ProjectOption
+                    key={project.id}
+                    id={project.id}
+                    name={project.name}
+                  />
+                ))}
+              </select>
               <br /> <label htmlFor="projectDetails">Details: </label>
               <input
                 type="text"
                 id="projectDetails"
                 name="projectDetails"
-                value={details}
+                defaultValue={details}
+                onChange={handleDetailsUpdate}
               />
               <br />
               <label htmlFor="rate">Rate: </label>
-              <select id="rate" name="rate">
+              <select
+                id="rate"
+                name="rate"
+                defaultValue={currentRateId + 1}
+                onChange={handleRateUpdate}
+              >
+                {rates.map((rate) => (
+                  <RateOption
+                    key={rate.id}
+                    id={rate.id}
+                    rate={rate.rate}
+                    label={rate.label}
+                  />
+                ))}
                 <option value="-2" className="utility">
                   Add a new rate
                 </option>
               </select>
               <br />
               <label htmlFor="startTime">Start time: </label>
-              <input type="time" id="startTime" name="startTime" required />
-              <input type="date" />
+              <input
+                type="time"
+                id="startTime"
+                name="startTime"
+                value={startDate.toLocaleTimeString("en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                  hour12: false,
+                })}
+                onChange={handleStartTimeUpdate}
+                required
+              />
+              <input
+                type="date"
+                value={startDate.toISOString().split("T")[0]}
+                onChange={handleDateUpdate}
+              />
               <br />
               <label htmlFor="endTime">End time: </label>
-              <input type="time" id="endTime" name="endTime" required />
+              <input
+                type="time"
+                id="endTime"
+                name="endTime"
+                value={endDate.toLocaleTimeString("en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  second: "2-digit",
+                  hour12: false,
+                })}
+                onChange={handleEndTimeUpdate}
+                required
+              />
               <br />
               <button
                 type="submit"
