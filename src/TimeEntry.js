@@ -23,16 +23,16 @@ const TimeEntry = ({
   );
   const [finalStartTime, setFinalStartTime] = useState("");
   const [finalEndTime, setFinalEndTime] = useState("");
-
-  let matchingProjectIndex = -2;
-  let matchingRateIndex = -2;
+  const mainTextColorStyle = {
+    color: "var(--mainTextColor)",
+  };
 
   const handleProjectOptionChange = (event) => {
     const selectedValue = Number(event.target.value);
     if (selectedValue === -2) {
       addNewProjectPop();
     } else {
-      matchingProjectIndex = projects.findIndex(
+      const matchingProjectIndex = projects.findIndex(
         (project) => project.id === selectedValue
       );
 
@@ -45,7 +45,9 @@ const TimeEntry = ({
     if (selectedValue === -2) {
       addNewRatePop();
     } else {
-      matchingRateIndex = rates.findIndex((rate) => rate.id === selectedValue);
+      const matchingRateIndex = rates.findIndex(
+        (rate) => rate.id === selectedValue
+      );
 
       setCurrentRateIndex(matchingRateIndex);
     }
@@ -80,7 +82,7 @@ const TimeEntry = ({
   }, [formDate, startTime, endTime]);
 
   useEffect(() => {
-    if (totalHours !== "" && currentRateIndex !== "") {
+    if (totalHours !== "" && currentRateIndex !== "-1") {
       setTotalFee((totalHours * rates[currentRateIndex].rate).toFixed(2));
     }
   }, [totalHours, currentRateIndex]);
@@ -94,7 +96,13 @@ const TimeEntry = ({
       startTime: finalStartTime,
       endTime: finalEndTime,
     });
-  }, [details]);
+  }, [
+    details,
+    currentProjectIndex,
+    currentRateIndex,
+    finalStartTime,
+    finalEndTime,
+  ]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -111,13 +119,14 @@ const TimeEntry = ({
               {projects[currentProjectIndex].name}
             </div>
             <div id="clientName" className="clientName">
-              for {projects[currentProjectIndex].client}
+              <span style={mainTextColorStyle}>for</span>{" "}
+              {projects[currentProjectIndex].client}
             </div>
           </div>
           <div id="projectSelector">
-            or{" "}
+            <span style={mainTextColorStyle}>or</span>{" "}
             <select name="project" onChange={handleProjectOptionChange}>
-              <option value="null">Another Project</option>
+              <option value="">Another Project</option>
               <option value="-2" className="utility">
                 + Add a new Project
               </option>
@@ -131,54 +140,50 @@ const TimeEntry = ({
             </select>
           </div>
         </div>
-        <div id="timeBlock">
-          <div id="logFormLeft">
-            <label htmlFor="startTime">Start time:</label>
-            <input
-              type="time"
-              id="startTime"
-              name="startTime"
-              onChange={handleStartTimeChange}
-              required
-            />
-            <input type="date" value={formDate} onChange={handleDateChange} />
-            <br />
-            <label htmlFor="endTime">End time:</label>
-            <input
-              type="time"
-              id="endTime"
-              name="endTime"
-              onChange={handleEndTimeChange}
-              required
-            />
-            <br />
-            <label htmlFor="rate">Rate:</label>
-            <select id="rate" name="rate" onChange={handleRateOptionChange}>
-              {rates.map((rate) => (
-                <RateOption
-                  key={rate.id}
-                  id={rate.id}
-                  rate={rate.rate}
-                  label={rate.label}
-                />
-              ))}
-              <option value="-2" className="utility">
-                Add a new rate
-              </option>
-            </select>
-          </div>
-
-          <div id="totalHours">
-            Total: {totalHours}hrs, ${totalFee}
-          </div>
+        <div id="logFormLeft">
+          <label htmlFor="startTime">Start time: </label>
+          <input
+            type="time"
+            id="startTime"
+            name="startTime"
+            onChange={handleStartTimeChange}
+            required
+          />{" "}
+          <input type="date" value={formDate} onChange={handleDateChange} />
+          <br />
+          <label htmlFor="endTime">End time: </label>
+          <input
+            type="time"
+            id="endTime"
+            name="endTime"
+            onChange={handleEndTimeChange}
+            required
+          />
+          <br />
+          <label htmlFor="rate">Rate: </label>
+          <select id="rate" name="rate" onChange={handleRateOptionChange}>
+            {rates.map((rate) => (
+              <RateOption
+                key={rate.id}
+                id={rate.id}
+                rate={rate.rate}
+                label={rate.label}
+              />
+            ))}
+            <option value="-2" className="utility">
+              Add a new rate
+            </option>
+          </select>
         </div>
+
         <label htmlFor="descriptionBox">Work details:</label>
+        <br />
         <textarea
           id="descriptionBox"
           required
           name="descriptionBox"
           placeholder="Describe what was done."
-          defaultValue="Describe what was done."
+          defaultValue=""
           rows="4"
           cols="5"
           onChange={handleDetailsChange}
@@ -186,6 +191,10 @@ const TimeEntry = ({
 
         <button type="submit" id="submitHours" className="mainButton">
           Submit Hours
+          <br />
+          <span className="buttonTotals">
+            (Total: {totalHours}hrs, ${totalFee})
+          </span>
         </button>
       </form>
     </div>

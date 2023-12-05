@@ -5,7 +5,6 @@ const AddNewProject = ({
   addProject,
   addNewProjectClose,
   clients,
-  setClients,
   newProjectDetails,
   setNewProjectDetails,
   addNewClientPop,
@@ -43,38 +42,44 @@ const AddNewProject = ({
   };
 
   return (
-    <div id="addProjectContainer" className="entryContainer">
-      <div className="entryHeader">
-        <span>Add a Project</span>
-        <button className="cancelButton" onClick={addNewProjectClose}>
-          Cancel
-        </button>
-      </div>
-      <form onSubmit={handleAddProject} id="addProjectForm">
-        <label htmlFor="projectNameBox">Project Name:</label>
-        <input
-          type="text"
-          id="addProjectName"
-          name="addProjectName"
-          onChange={handleNameChange}
-          placeholder="Enter project name"
-        ></input>
-        <br />
-        <label htmlFor="clientList">Client:</label>
-        <select id="clientList" name="clientList" onChange={handleClientChange}>
-          <option value="null">Select Client</option>
-          <option value="-2" className="utility">
-            + Add a new Client
-          </option>
-          {clients.map((client) => (
-            <ClientOption key={client.id} id={client.id} name={client.name} />
-          ))}
-        </select>
+    <div id="blackout">
+      <div id="addProjectContainer" className="entryContainer">
+        <div className="entryHeader">
+          <span>Add a Project</span>
+          <button className="cancelButton" onClick={addNewProjectClose}>
+            Cancel
+          </button>
+        </div>
+        <form onSubmit={handleAddProject} id="addProjectForm">
+          <label htmlFor="projectNameBox">Project Name:</label>
+          <input
+            type="text"
+            id="addProjectName"
+            name="addProjectName"
+            onChange={handleNameChange}
+            placeholder="Enter project name"
+          ></input>
+          <br />
+          <label htmlFor="clientList">Client:</label>
+          <select
+            id="clientList"
+            name="clientList"
+            onChange={handleClientChange}
+          >
+            <option value="null">Select Client</option>
+            <option value="-2" className="utility">
+              + Add a new Client
+            </option>
+            {clients.map((client) => (
+              <ClientOption key={client.id} id={client.id} name={client.name} />
+            ))}
+          </select>
 
-        <button type="submit" id="addProjectButton" className="mainButton">
-          Add Project
-        </button>
-      </form>
+          <button type="submit" id="addProjectButton" className="mainButton">
+            Add Project
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

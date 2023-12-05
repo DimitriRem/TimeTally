@@ -4,94 +4,47 @@
   padding: 0;
 }
 
+/* [THEME 0.1]
+   :root {
+  --mainBG1: #e7e7e7;
+  --headerBG: #1e6950;
+  --entryBoxHeaderBG: #64aa93;
+  --mainTextColor: #2f3b68;
+  --mainButtonBG: #2f3b68;
+  --deleteEntryBG: #d37d7d;
+  --deleteButtonBG: #a72c2c;
+  --dateRowBG: #d6fce4;
+  --dateRowBorder: #72b98c;
+  --dateRowText: #72b98c;
+  --totalsBoxBG: #d6fce4;
+  --shadow: #b9b9b9;
+  --utilityItemBG: #a4caca;
+  --deleteEntryText: #fff;
+} */
+
 :root {
-  --colTeal: #268c6a;
-  --colTealLight: #64aa93;
-  --colTealDark: #1e6950;
-  --colBlue: #2f3b68;
-  --colBlueLighter: #d8dff8;
-  --colBlueLight: #616fa5;
-  --colBlueDark: #2d3349;
-  --colRed: #d23535;
-  --colRedLight: #d37d7d;
-  --colRedDark: #a72c2c;
-  --colYellow: #f9ee4f;
-  --colYellowLight: #fff9b5;
-  --colYellowDark: #d4c816;
-  --colCyan: #97f4b9;
-  --colCyanLight: #d6fce4;
-  --colCyanDark: #72b98c;
-  --colGrey: #9e9e9e;
-  --colGreyLight: #b9b9b9;
-  --colGreyLighter: #e7e7e7;
-  --colGreyDark: #7a7a7a;
-}
-
-#colorPalette {
-  display: flex;
-  flex-direction: row;
-}
-.colorblock {
-  width: 20px;
-  height: 20px;
-}
-
-#cb1 {
-  background-color: var(--colTeal);
-}
-#cb2 {
-  background-color: var(--colTealLight);
-}
-#cb3 {
-  background-color: var(--colTealDark);
-}
-#cb4 {
-  background-color: var(--colBlue);
-}
-#cb5 {
-  background-color: var(--colBlueLight);
-}
-#cb6 {
-  background-color: var(--colBlueDark);
-}
-#cb7 {
-  background-color: var(--colRed);
-}
-#cb8 {
-  background-color: var(--colRedLight);
-}
-#cb9 {
-  background-color: var(--colRedDark);
-}
-#cb10 {
-  background-color: var(--colYellow);
-}
-#cb11 {
-  background-color: var(--colYellowLight);
-}
-#cb12 {
-  background-color: var(--colYellowDark);
-}
-#cb13 {
-  background-color: var(--colCyan);
-}
-#cb14 {
-  background-color: var(--colCyanLight);
-}
-#cb15 {
-  background-color: var(--colCyanDark);
-}
-#cb16 {
-  background-color: var(--colGrey);
-}
-#cb17 {
-  background-color: var(--colGreyLighter);
-}
-#cb18 {
-  background-color: var(--colGreyLight);
-}
-#cb19 {
-  background-color: var(--colGreyDark);
+  --mainBG1: #1b1b1b;
+  --toolboxBG: #222222;
+  --headerBG: #53457a;
+  --entryBoxHeaderBG: #53457a;
+  --entryContainerBG: #363636;
+  --mainTextColor: #c0c0c0;
+  --mainButtonBG: #3868ab;
+  --mainButtonBorder: #3680e7;
+  --highlightText: #eeeeee;
+  --deleteEntryBG: #7c3d3d;
+  --deleteButtonBG: #d51818;
+  --dateRowBG: #3a3645;
+  --dateRowBorder: #53457a;
+  --dateRowText: #c7c7c7;
+  --utilityItemBG: #53457a;
+  --deleteEntryText: #fff;
+  --trBottomBorder: #3a3645;
+  --updateDetailsBG: #363636;
+  --inputBG: #656565;
+  --inputTextColor: #eeeeee;
+  --statusBG: #eee;
+  --blackout: #000000b3;
 }
 
 html {
@@ -100,14 +53,16 @@ html {
 }
 
 header {
-  background-color: var(--colTealDark);
+  background-color: var(--headerBG);
   padding: 0 10px;
-  color: white;
+  color: var(--mainTextColor);
   width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
+  align-items: center;
+  height: 50px;
 }
 #headerRight {
   height: 40px;
@@ -119,79 +74,93 @@ h1 {
   line-height: 1.5rem;
 }
 
-a {
-  color: var(--colRed);
-}
-
 body {
-  background-image: linear-gradient(to bottom, var(--colGreyLighter), white);
+  background-color: var(--mainBG1);
   height: 100%;
 }
-#toolbox {
-  width: 90%;
-  margin: 0 auto;
-}
-
-.stackItem {
-  background-color: var(--colGreyLighter);
-  margin: 0 5px;
-}
-.stackItemHeader {
-  background-color: var(--colTeal);
-  color: white;
+#desktopContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
-  height: 30px;
-  font-weight: bold;
-  padding: 5px;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
-.stackList {
-  padding: 5px;
+
+#toolbox {
+  flex-grow: 1;
+  height: 92vh;
+  background-color: var(--toolboxBG);
+}
+
+.status {
+  width: 400px;
+  z-index: 20;
+  background-color: var(--statusBG);
+  position: absolute;
+  left: 200px;
+  top: -200px;
+  border-radius: 10px;
+  opacity: 0;
+  padding: 5px 10px;
+  text-align: center;
+  font-size: 1.2rem;
+  align-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.status.show {
+  opacity: 1;
+  top: 5px;
+}
+
+#tableContainer {
+  flex-grow: 5;
+  height: 90vh;
   overflow: auto;
 }
 
-/* ENTRY BLOCKS ================ */
+/* v------ ENTRY BLOCKS ------v */
 
 .entryContainer {
   padding: 10px;
-  max-width: 500px;
+  width: 350px;
   border-radius: 8px;
   margin: 10px auto;
-  background-color: white;
-  box-shadow: 0 3px 18px var(--colGreyLight);
-  color: var(--colBlue);
+  background-color: var(--entryContainerBG);
+  color: var(--mainTextColor);
+}
+
+#blackout {
+  height: 100%;
+  background-color: var(--blackout);
+  position: absolute;
+  top: 50px;
 }
 
 #addProjectContainer {
   position: relative;
-  top: -280px;
-  box-shadow: 0 3px 18px var(--colGreyLight), 0 0 50px 50px white;
 }
 #addClientContainer {
   position: relative;
   top: -560px;
-  box-shadow: 0 3px 18px var(--colGreyLight), 0 0 50px 50px white;
 }
 #addRateContainer {
   position: relative;
   top: -280px;
-  box-shadow: 0 3px 18px var(--colGreyLight), 0 0 50px 50px white;
 }
 
 .entryHeader {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  background-color: var(--colTealLight);
+  flex-direction: column;
+  align-items: left;
+  background-color: var(--headerBG);
   justify-content: space-between;
   padding: 5px;
-  color: white;
+  color: var(--highlightText);
   font-size: 1.5rem;
   font-weight: bold;
 }
 
-/* =============================== */
+/* ^------ ENTRY BLOCKS ------^ */
 
 #logForm {
   display: flex;
@@ -204,37 +173,25 @@ body {
 }
 
 .utility {
-  background-color: #a4caca;
+  background-color: var(--utilityItemBG);
 }
 
-#timeBlock {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 5px;
+.buttonTotals {
+  font-weight: normal;
+  font-size: 0.8rem;
 }
 
-#totalHours {
-  padding: 20px;
-  border: 2px solid var(--colBlue);
-  background-color: var(--colCyanLight);
-  border-radius: 5px;
-  height: 100%;
-  font-weight: bold;
-  color: var(--colBlue);
-}
-
-.mainButton {
+.mainButton,
+submit {
   margin: 20px auto;
-  width: 100%;
-  height: 40px;
   font-size: 1.2rem;
   font-weight: bold;
-  background-color: var(--colBlue);
-  color: white;
-  border-radius: 5px;
+  background-color: var(--mainButtonBG);
+  color: var(--highlightText);
+  border-radius: 10px;
   cursor: pointer;
+  padding: 1rem 2rem;
+  border: 3px solid var(--mainButtonBorder);
 }
 
 .deleteButton {
@@ -242,9 +199,9 @@ body {
   width: 80%;
   height: 30px;
   font-size: 0.8rem;
-  background-color: var(--colRedDark);
-  color: white;
-  border-radius: 5px;
+  background-color: var(--deleteButtonBG);
+  color: var(--mainTextColor);
+  border-radius: 10px;
   cursor: pointer;
 }
 
@@ -253,30 +210,46 @@ body {
   margin: 0 auto;
   font-size: 1.5rem;
   font-weight: bold;
-  color: var(--colTealDark);
+  color: var(--mainTextColor);
 }
 
-/* TABLE STYLES ================ */
+/* v------ FORM STYLES ------v */
+input,
+select,
+textarea {
+  background-color: var(--inputBG);
+  color: var(--inputTextColor);
+  border: none;
+  border-radius: 3px;
+  height: 1rem;
+}
+#descriptionBox {
+  min-width: 200px;
+  min-height: 3rem;
+}
+
+/* ^------ FORM STYLES ------^ */
+
+/* v------ TABLE STYLES ------v */
 
 .re-table {
   border-collapse: collapse;
-  display: block;
-  margin: 30px auto;
+  margin: 10px auto;
   min-width: 400px;
   width: 90%;
   border-radius: 5px 5px 0 0;
   overflow: hidden;
-  color: var(--colBlue);
+  color: var(--mainTextColor);
   font-size: 0.8rem;
 }
 
 .re-table tr {
-  border-bottom: 1px solid #e2e2e2;
+  border-bottom: 1px solid var(--trBottomBorder);
 }
 
 .re-table thead tr {
-  background-color: var(--colTealDark);
-  color: #ffffff;
+  background-color: var(--headerBG);
+  color: var(--mainTextColor);
   text-align: left;
   font-weight: bold;
 }
@@ -287,11 +260,15 @@ body {
 }
 
 .re-dateRow {
-  border-top: 2px solid var(--colCyanDark);
-  color: var(--colCyanDark);
+  border-top: 2px solid var(--dateRowBorder);
+  color: var(--dateRowText);
   font-size: 0.6rem;
   font-weight: bold;
-  background-color: var(--colCyanLight);
+  background-image: linear-gradient(
+    to bottom,
+    var(--dateRowBG),
+    var(--mainBG1)
+  );
 }
 
 .re-col-narrow {
@@ -299,8 +276,8 @@ body {
 }
 
 .re-totalsRow {
-  border-top: 3px solid var(--colTealDark);
-  color: var(--colTealDark);
+  border-top: 3px solid var(--headerBG);
+  color: var(--headerBG);
   font-weight: bold;
   font-size: 1.2rem;
 }
@@ -310,7 +287,9 @@ body {
 }
 
 .updateDetailsTd {
-  background-color: white;
+  background-color: var(--updateDetailsBG);
+  text-align: center;
+  font-size: 0.9rem;
 }
 
 .rowButton {
@@ -323,18 +302,23 @@ body {
 }
 
 .deleteConfirm {
-  background-color: var(--colRedLight);
-  color: white;
+  background-color: var(--deleteEntryBG);
+  color: var(--deleteEntryText);
+  font-size: 0.9rem;
   font-weight: bold;
   text-align: center;
 }
 
 .confirmButton {
-  margin: 5px;
-  color: white;
-  background-color: var(--colRedDark);
-  border: 1px solid white;
-  padding: 5px;
-  border-radius: 3px;
+  margin: 20px;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--deleteEntryText);
+  background-color: var(--deleteButtonBG);
+  border: 3px solid var(--deleteEntryText);
+  border-radius: 10px;
   cursor: pointer;
 }
+
+/* ^------ TABLE STYLES ------^ */

@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 const AddNewClient = ({
   addClient,
   addNewClientClose,
-  clients,
-  newClientDetails,
   setNewClientDetails,
 }) => {
   const [addClientName, setAddClientName] = useState("");
@@ -19,10 +17,9 @@ const AddNewClient = ({
   };
 
   useEffect(() => {
-    setNewClientDetails({
-      name: addClientName,
-    });
-  }, [addClientName]);
+    const details = { name: addClientName };
+    setNewClientDetails(details);
+  }, [addClientName, setNewClientDetails]);
 
   return (
     <div id="addClientContainer" className="entryContainer">
@@ -38,10 +35,10 @@ const AddNewClient = ({
           type="text"
           id="addClientName"
           name="addClientName"
+          value={addClientName}
           onChange={handleNameChange}
           placeholder="Enter client name"
-        ></input>
-
+        />
         <button type="submit" id="addClientButton" className="mainButton">
           Add Client
         </button>

@@ -41,6 +41,22 @@
     {
       "name": "New Client 2",
       "id": 5
+    },
+    {
+      "name": "Firday & Co",
+      "id": 6
+    },
+    {
+      "name": "saturday &Co",
+      "id": 7
+    },
+    {
+      "name": "dirk",
+      "id": 8
+    },
+    {
+      "name": "zaza",
+      "id": 9
     }
   ],
   "projects": [
@@ -78,27 +94,44 @@
       "name": "new proj 2",
       "client": "New Client 2",
       "id": 7
+    },
+    {
+      "name": "Friday Funday",
+      "client": "Firday & Co",
+      "id": 8
+    },
+    {
+      "name": "FF3",
+      "client": "Firday & Co",
+      "id": 9
+    },
+    {
+      "name": "ff4",
+      "client": "Firday & Co",
+      "id": 10
+    },
+    {
+      "name": "ff5",
+      "client": "saturday &Co",
+      "id": 11
+    },
+    {
+      "name": "zaza",
+      "client": "JayVay",
+      "id": 12
+    },
+    {
+      "name": "zazaza",
+      "client": "zaza",
+      "id": 13
+    },
+    {
+      "name": "Saturday fun",
+      "client": "saturday &Co",
+      "id": 14
     }
   ],
   "log": [
-    {
-      "id": 1,
-      "project": "Make Inc Website",
-      "details": "Added a thing",
-      "client": "Make Inc",
-      "rate": 10,
-      "startTime": "2022-09-15T11:30:00.000Z",
-      "endTime": "2022-09-15T14:30:00.000Z"
-    },
-    {
-      "id": 3,
-      "project": "Acmecorp App",
-      "details": "Prototype development",
-      "client": "Acmecorp",
-      "rate": 10,
-      "startTime": "2022-09-10T09:30:00.000Z",
-      "endTime": "2022-09-10T18:30:00.000Z"
-    },
     {
       "id": 4,
       "project": "Acmecorp Email",
@@ -109,18 +142,9 @@
       "endTime": "2022-09-20T16:00:00.000Z"
     },
     {
-      "id": 5,
-      "project": "Acmecorp Email",
-      "details": "email design",
-      "client": "Acmecorp",
-      "rate": 20,
-      "startTime": "2022-09-20T10:30:00.000Z",
-      "endTime": "2022-09-20T11:00:00.000Z"
-    },
-    {
       "id": 6,
       "project": "JayVay widget",
-      "details": "widget design",
+      "details": "widget designbbb",
       "client": "JayVay",
       "rate": 20,
       "startTime": "2022-09-20T17:30:00.000Z",
@@ -136,49 +160,58 @@
       "endTime": "2022-09-15T17:30:00.000Z"
     },
     {
+      "id": 10,
       "project": "Make Inc Website",
-      "details": "sixth sense",
+      "details": "sixth sense d",
       "client": "Make Inc",
       "rate": 20,
-      "startTime": "2023-11-09T08:00:00.000Z",
-      "endTime": "2023-11-09T20:00:00.000Z",
-      "id": 10
+      "startTime": "2023-11-09T09:00:00.000Z",
+      "endTime": "2023-11-09T21:00:00.000Z"
     },
     {
-      "project": "Make Inc Website",
-      "details": "Dim6",
-      "client": "Make Inc",
-      "rate": 10,
-      "startTime": "2023-11-10T23:00:00.000Z",
-      "endTime": "2023-11-11T00:00:00.000Z",
-      "id": 15
+      "id": 15,
+      "project": "Acmecorp App",
+      "details": "Dim6 acmecvb",
+      "client": "Acmecorp",
+      "rate": 20,
+      "startTime": "2023-11-10T02:00:00.000Z",
+      "endTime": "2023-11-10T04:00:00.000Z"
     },
     {
-      "project": "jayvayp2",
-      "details": "Thu test 1",
-      "client": "JayVay",
-      "rate": "12",
-      "startTime": "2023-11-15T23:00:00.000Z",
-      "endTime": "2023-11-16T00:00:00.000Z",
-      "id": 22
-    },
-    {
-      "project": "jayvayp2",
-      "details": "Thu test 2",
-      "client": "JayVay",
-      "rate": 10,
-      "startTime": "2023-11-16T01:00:00.000Z",
-      "endTime": "2023-11-16T02:00:00.000Z",
-      "id": 23
-    },
-    {
+      "id": 24,
       "project": "new proj 2",
-      "details": "checking time. Entered 12-13\n",
+      "details": "checking time. 12-13",
       "client": "New Client 2",
       "rate": 10,
       "startTime": "2023-11-29T10:00:00.000Z",
-      "endTime": "2023-11-29T11:00:00.000Z",
-      "id": 24
+      "endTime": "2023-11-29T11:00:00.000Z"
+    },
+    {
+      "project": "new proj 2",
+      "details": "test for deleting",
+      "client": "New Client 2",
+      "rate": "12",
+      "startTime": "2023-11-30T08:10:00.000Z",
+      "endTime": "2023-11-30T09:11:00.000Z",
+      "id": 25
+    },
+    {
+      "project": "ff5",
+      "details": "test states1",
+      "client": "saturday &Co",
+      "rate": 10,
+      "startTime": "2023-12-04T23:00:00.000Z",
+      "endTime": "2023-12-05T00:00:00.000Z",
+      "id": 27
+    },
+    {
+      "project": "Make Inc Website",
+      "details": "lala",
+      "client": "Make Inc",
+      "rate": 10,
+      "startTime": "2023-12-05T12:00:00.000Z",
+      "endTime": "2023-12-05T12:30:00.000Z",
+      "id": 30
     }
   ]
 }

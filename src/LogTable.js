@@ -1,30 +1,36 @@
-import React from "react";
+import React, { useMemo, useCallback } from "react";
 import LogTableRow from "./LogTableRow";
 
-// Assuming you have an array of logs named 'items'
-const LogTable = ({ items, API_URL, rates, projects }) => {
-  // Function to group logs by date
-  const groupLogsByDate = (items) => {
+const LogTable = ({
+  items,
+  API_URL,
+  rates,
+  projects,
+  addNewProjectPop,
+  addNewRatePop,
+  setStatus,
+}) => {
+  const groupLogsByDate = useCallback((items) => {
     const groupedLogs = {};
     items.forEach((log) => {
-      const startDate = new Date(log.startTime).toLocaleDateString(); // Get the date and format as string
-
+      const startDate = new Date(log.startTime).toLocaleDateString();
       if (!groupedLogs[startDate]) {
         groupedLogs[startDate] = [];
       }
       groupedLogs[startDate].push(log);
     });
     return groupedLogs;
-  };
+  }, []);
 
-  // Render the table
-  const renderTable = () => {
-    const sortedLogs = items.sort(
-      (a, b) => Date.parse(a.startTime) - Date.parse(b.startTime)
-    ); // Sort logs by startDate
+  const sortedLogs = useMemo(
+    () =>
+      items.sort((a, b) => Date.parse(a.startTime) - Date.parse(b.startTime)),
+    [items]
+  );
+
+  const renderTable = useCallback(() => {
     const groupedLogs = groupLogsByDate(sortedLogs);
     let lastDate = null;
-
     return (
       <>
         <div className="re-heading">Time Logged</div>
@@ -56,16 +62,14 @@ const LogTable = ({ items, API_URL, rates, projects }) => {
                   options
                 );
                 if (startDate !== lastDate) {
-                  // Render the date row when the date changes
                   lastDate = startDate;
                   return (
                     <React.Fragment key={startDate}>
-                      <tr>
+                      <tr className="dateTR">
                         <td colSpan="9" className="re-dateRow">
                           {startDate}
                         </td>
                       </tr>
-
                       <LogTableRow
                         key={log.id}
                         id={log.id}
@@ -78,11 +82,13 @@ const LogTable = ({ items, API_URL, rates, projects }) => {
                         API_URL={API_URL}
                         rates={rates}
                         projects={projects}
+                        addNewProjectPop={addNewProjectPop}
+                        addNewRatePop={addNewRatePop}
+                        setStatus={setStatus}
                       />
                     </React.Fragment>
                   );
                 } else {
-                  // Only render the LogTableRow for subsequent entries on the same day
                   return (
                     <LogTableRow
                       key={log.id}
@@ -96,6 +102,7 @@ const LogTable = ({ items, API_URL, rates, projects }) => {
                       API_URL={API_URL}
                       rates={rates}
                       projects={projects}
+                      setStatus={setStatus}
                     />
                   );
                 }
@@ -107,9 +114,17 @@ const LogTable = ({ items, API_URL, rates, projects }) => {
         )}
       </>
     );
-  };
+  }, [
+    items,
+    sortedLogs,
+    groupLogsByDate,
+    API_URL,
+    rates,
+    projects,
+    addNewProjectPop,
+    addNewRatePop,
+  ]);
 
-  // Render the table component
   return <div>{renderTable()}</div>;
 };
 

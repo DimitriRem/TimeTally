@@ -1,14 +1,15 @@
+import React, { useState, useEffect } from "react";
 import Header from "./Header";
 import TimeEntry from "./TimeEntry";
 import AddNewProject from "./AddNewProject";
 import AddNewClient from "./AddNewClient";
 import AddNewRate from "./AddNewRate";
 import LogTable from "./LogTable";
-import { useState, useEffect } from "react";
 import apiRequest from "./apiRequest";
 
+const API_URL = "http://localhost:3500/";
+
 function App() {
-  const API_URL = "http://localhost:3500/";
   const currentDate = new Date();
   const dateOptions = {
     weekday: "short",
@@ -17,6 +18,7 @@ function App() {
     year: "numeric",
   };
   const formattedDate = currentDate.toLocaleDateString("en-UK", dateOptions);
+
   const [items, setItems] = useState([]);
   const [clients, setClients] = useState([]);
   const [projects, setProjects] = useState([]);
@@ -27,6 +29,10 @@ function App() {
   const [newProjectDetails, setNewProjectDetails] = useState("");
   const [newClientDetails, setNewClientDetails] = useState("");
   const [newRateDetails, setNewRateDetails] = useState("");
+  const [addNewProjectIsVisible, setAddNewProjectIsVisible] = useState(false);
+  const [addNewClientIsVisible, setAddNewClientIsVisible] = useState(false);
+  const [addNewRateIsVisible, setAddNewRateIsVisible] = useState(false);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -86,8 +92,24 @@ function App() {
     };
 
     const result = await apiRequest(API_URL + "log/", postOptions);
+    setStatus("Hours submitted");
+
     if (result) setFetchError(result);
   };
+
+  useEffect(() => {
+    let timeoutId;
+
+    if (status !== "") {
+      timeoutId = setTimeout(() => {
+        setStatus("");
+      }, 3000);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [status]);
 
   const addProject = async (project) => {
     const listProjects = [...projects, newProjectDetails];
@@ -103,6 +125,7 @@ function App() {
     };
 
     const result = await apiRequest(API_URL + "projects/", postOptions);
+    setStatus("new project added.");
     if (result) setFetchError(result);
   };
 
@@ -120,6 +143,7 @@ function App() {
     };
 
     const result = await apiRequest(API_URL + "clients/", postOptions);
+    setStatus("New client added.");
     if (result) setFetchError(result);
   };
 
@@ -137,34 +161,8 @@ function App() {
     };
 
     const result = await apiRequest(API_URL + "rates/", postOptions);
+    setStatus("New rate added.");
     if (result) setFetchError(result);
-  };
-
-  const [addNewProjectIsVisible, setAddNewProjectIsVisible] = useState(false);
-
-  const addNewProjectPop = () => {
-    setAddNewProjectIsVisible(true);
-  };
-  const addNewProjectClose = () => {
-    setAddNewProjectIsVisible(false);
-  };
-
-  const [addNewClientIsVisible, setAddNewClientIsVisible] = useState(false);
-
-  const addNewClientPop = () => {
-    setAddNewClientIsVisible(true);
-  };
-  const addNewClientClose = () => {
-    setAddNewClientIsVisible(false);
-  };
-
-  const [addNewRateIsVisible, setAddNewRateIsVisible] = useState(false);
-
-  const addNewRatePop = () => {
-    setAddNewRateIsVisible(true);
-  };
-  const addNewRateClose = () => {
-    setAddNewRateIsVisible(false);
   };
 
   const handleSubmit = (newItem) => {
@@ -175,61 +173,101 @@ function App() {
     setNewItem("");
   };
 
+  const addNewProjectPop = () => {
+    setAddNewProjectIsVisible(true);
+  };
+
+  const addNewProjectClose = () => {
+    setAddNewProjectIsVisible(false);
+  };
+
+  const addNewClientPop = () => {
+    setAddNewClientIsVisible(true);
+  };
+
+  const addNewClientClose = () => {
+    setAddNewClientIsVisible(false);
+  };
+
+  const addNewRatePop = () => {
+    setAddNewRateIsVisible(true);
+  };
+
+  const addNewRateClose = () => {
+    setAddNewRateIsVisible(false);
+  };
+
+  const testStatus = () => {
+    setStatus("Testing");
+  };
+
   return (
     <>
       <Header date={formattedDate} />
-      <div id="toolbox">
-        {!fetchError && !isLoading && (
-          <TimeEntry
-            projects={projects}
-            rates={rates}
-            newItem={newItem}
-            setNewItem={setNewItem}
-            handleSubmit={handleSubmit}
-            addNewProjectPop={addNewProjectPop}
-            addNewRatePop={addNewRatePop}
-          />
-        )}
-        {addNewProjectIsVisible && (
-          <AddNewProject
-            addProject={addProject}
-            clients={clients}
-            setClients={setClients}
-            addNewProjectClose={addNewProjectClose}
-            newProjectDetails={newProjectDetails}
-            setNewProjectDetails={setNewProjectDetails}
-            addNewClientPop={addNewClientPop}
-          />
-        )}
-        {addNewClientIsVisible && (
-          <AddNewClient
-            addClient={addClient}
-            clients={clients}
-            setClients={setClients}
-            addNewClientClose={addNewClientClose}
-            newClientDetails={newClientDetails}
-            setNewClientDetails={setNewClientDetails}
-          />
-        )}
-        {addNewRateIsVisible && (
-          <AddNewRate
-            addRate={addRate}
-            addNewRateClose={addNewRateClose}
-            newRateDetails={newRateDetails}
-            setNewRateDetails={setNewRateDetails}
-          />
-        )}
+
+      <div className={`status ${status !== "" ? "show" : ""}`}>{status}</div>
+
+      <div id="desktopContainer">
+        <div id="toolbox">
+          {!fetchError && !isLoading && (
+            <TimeEntry
+              projects={projects}
+              rates={rates}
+              newItem={newItem}
+              setNewItem={setNewItem}
+              handleSubmit={handleSubmit}
+              addNewProjectPop={addNewProjectPop}
+              addNewRatePop={addNewRatePop}
+            />
+          )}
+          {addNewProjectIsVisible && (
+            <AddNewProject
+              addProject={addProject}
+              clients={clients}
+              setClients={setClients}
+              addNewProjectClose={addNewProjectClose}
+              newProjectDetails={newProjectDetails}
+              setNewProjectDetails={setNewProjectDetails}
+              addNewClientPop={addNewClientPop}
+            />
+          )}
+          {addNewClientIsVisible && (
+            <AddNewClient
+              addClient={addClient}
+              clients={clients}
+              setClients={setClients}
+              addNewClientClose={addNewClientClose}
+              newClientDetails={newClientDetails}
+              setNewClientDetails={setNewClientDetails}
+            />
+          )}
+          {addNewRateIsVisible && (
+            <AddNewRate
+              addRate={addRate}
+              addNewRateClose={addNewRateClose}
+              newRateDetails={newRateDetails}
+              setNewRateDetails={setNewRateDetails}
+            />
+          )}
+        </div>
+        <div id="tableContainer">
+          {isLoading && <p>Loading items...</p>}
+          {fetchError && (
+            <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>
+          )}
+          {!fetchError && !isLoading && (
+            <LogTable
+              items={items}
+              API_URL={API_URL}
+              rates={rates}
+              projects={projects}
+              addNewProjectPop={addNewProjectPop}
+              addNewRatePop={addNewRatePop}
+              setStatus={setStatus}
+            />
+          )}
+        </div>
       </div>
-      {isLoading && <p>Loading items...</p>}
-      {fetchError && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
-      {!fetchError && !isLoading && (
-        <LogTable
-          items={items}
-          API_URL={API_URL}
-          rates={rates}
-          projects={projects}
-        />
-      )}
     </>
   );
 }
