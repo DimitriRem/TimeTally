@@ -197,10 +197,6 @@ function App() {
     setAddNewRateIsVisible(false);
   };
 
-  const testStatus = () => {
-    setStatus("Testing");
-  };
-
   return (
     <>
       <Header date={formattedDate} />

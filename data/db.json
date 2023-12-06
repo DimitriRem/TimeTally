@@ -144,7 +144,7 @@
     {
       "id": 6,
       "project": "JayVay widget",
-      "details": "widget designbbb",
+      "details": "widget designbbbm",
       "client": "JayVay",
       "rate": 20,
       "startTime": "2022-09-20T17:30:00.000Z",
@@ -196,22 +196,58 @@
       "id": 25
     },
     {
-      "project": "ff5",
-      "details": "test states1",
-      "client": "saturday &Co",
+      "project": "JayVay widget",
+      "details": "Editing CSS on Jayvay widget",
+      "client": "JayVay",
       "rate": 10,
-      "startTime": "2023-12-04T23:00:00.000Z",
-      "endTime": "2023-12-05T00:00:00.000Z",
-      "id": 27
+      "startTime": "2022-09-15T07:00:00.000Z",
+      "endTime": "2022-09-15T11:00:00.000Z",
+      "id": 31
+    },
+    {
+      "project": "JayVay widget",
+      "details": "Editing CSS on Jayvay widget",
+      "client": "JayVay",
+      "rate": 10,
+      "startTime": "2022-09-16T07:00:00.000Z",
+      "endTime": "2022-09-16T11:00:00.000Z",
+      "id": 32
+    },
+    {
+      "project": "Acmecorp Email",
+      "details": "Edited copy",
+      "client": "Acmecorp",
+      "rate": 10,
+      "startTime": "2022-09-16T12:00:00.000Z",
+      "endTime": "2022-09-16T15:00:00.000Z",
+      "id": 33
     },
     {
       "project": "Make Inc Website",
-      "details": "lala",
+      "details": "nooooooooo",
       "client": "Make Inc",
       "rate": 10,
-      "startTime": "2023-12-05T12:00:00.000Z",
-      "endTime": "2023-12-05T12:30:00.000Z",
-      "id": 30
+      "startTime": "2023-12-06T07:00:00.000Z",
+      "endTime": "2023-12-06T08:00:00.000Z",
+      "id": 35
+    },
+    {
+      "project": "ff5",
+      "details": "sadsak2",
+      "client": "saturday &Co",
+      "rate": 10,
+      "startTime": "2023-12-06T02:00:00.000Z",
+      "endTime": "2023-12-06T03:00:00.000Z",
+      "id": 37
+    },
+    {
+      "project": "ff5",
+      "details": "sadsak2gggggeeeggg",
+      "client": "saturday &Co",
+      "rate": 10,
+      "startTime": "2023-12-06T05:00:00.000Z",
+      "endTime": "2023-12-06T06:00:00.000Z",
+      "id": 38
     }
   ]
 }

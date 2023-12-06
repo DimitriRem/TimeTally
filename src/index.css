@@ -86,7 +86,8 @@ body {
 }
 
 #toolbox {
-  flex-grow: 1;
+  max-width: 360px;
+  margin: 0 auto;
   height: 92vh;
   background-color: var(--toolboxBG);
 }
@@ -113,9 +114,9 @@ body {
 }
 
 #tableContainer {
-  flex-grow: 5;
   height: 90vh;
   overflow: auto;
+  width: 100%;
 }
 
 /* v------ ENTRY BLOCKS ------v */
@@ -228,14 +229,13 @@ textarea {
   min-height: 3rem;
 }
 
-/* ^------ FORM STYLES ------^ */
+/* ^------ FORM STYLES end ------^ */
 
 /* v------ TABLE STYLES ------v */
 
 .re-table {
   border-collapse: collapse;
   margin: 10px auto;
-  min-width: 400px;
   width: 90%;
   border-radius: 5px 5px 0 0;
   overflow: hidden;
@@ -322,3 +322,30 @@ textarea {
 }
 
 /* ^------ TABLE STYLES ------^ */
+
+@media (max-width: 850px) {
+  #desktopContainer {
+    flex-direction: column;
+  }
+  #toolbox {
+    width: 100%;
+    height: fit-content;
+    background-color: var(--toolboxBG);
+  }
+  #tableContainer {
+    overflow: auto;
+  }
+  .re-table {
+    font-size: 0.5rem;
+    margin: 5px auto;
+    width: 90%;
+  }
+  .mainButton,
+  submit {
+    width: 80%;
+  }
+
+  .deleteButton {
+    width: 80%;
+  }
+}
