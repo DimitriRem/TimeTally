@@ -4,24 +4,6 @@
   padding: 0;
 }
 
-/* [THEME 0.1]
-   :root {
-  --mainBG1: #e7e7e7;
-  --headerBG: #1e6950;
-  --entryBoxHeaderBG: #64aa93;
-  --mainTextColor: #2f3b68;
-  --mainButtonBG: #2f3b68;
-  --deleteEntryBG: #d37d7d;
-  --deleteButtonBG: #a72c2c;
-  --dateRowBG: #d6fce4;
-  --dateRowBorder: #72b98c;
-  --dateRowText: #72b98c;
-  --totalsBoxBG: #d6fce4;
-  --shadow: #b9b9b9;
-  --utilityItemBG: #a4caca;
-  --deleteEntryText: #fff;
-} */
-
 :root {
   --mainBG1: #1b1b1b;
   --toolboxBG: #222222;
@@ -45,6 +27,8 @@
   --inputTextColor: #eeeeee;
   --statusBG: #eee;
   --blackout: #000000b3;
+  --cancelButtonBG: #eee;
+  --cancelButtonText: #4f4f4f;
 }
 
 html {
@@ -142,11 +126,9 @@ body {
 }
 #addClientContainer {
   position: relative;
-  top: -560px;
 }
 #addRateContainer {
   position: relative;
-  top: -280px;
 }
 
 .entryHeader {
@@ -161,7 +143,18 @@ body {
   font-weight: bold;
 }
 
-/* ^------ ENTRY BLOCKS ------^ */
+.cancelButton {
+  font-size: 0.8rem;
+  width: 100px;
+  font-weight: bold;
+  background-color: var(--cancelButtonBG);
+  color: var(--cancelButtonText);
+  border-radius: 5px;
+  cursor: pointer;
+  border: 3px solid var(--cancelButtonText);
+}
+
+/* ^------ ENTRY BLOCKS end ------^ */
 
 #logForm {
   display: flex;
@@ -272,14 +265,7 @@ textarea {
 }
 
 .re-col-narrow {
-  width: 5%;
-}
-
-.re-totalsRow {
-  border-top: 3px solid var(--headerBG);
-  color: var(--headerBG);
-  font-weight: bold;
-  font-size: 1.2rem;
+  width: 8%;
 }
 
 .edit {

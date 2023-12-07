@@ -57,6 +57,14 @@
     {
       "name": "zaza",
       "id": 9
+    },
+    {
+      "name": "fred",
+      "id": 10
+    },
+    {
+      "name": "cheeseman",
+      "id": 11
     }
   ],
   "projects": [
@@ -129,6 +137,11 @@
       "name": "Saturday fun",
       "client": "saturday &Co",
       "id": 14
+    },
+    {
+      "name": "cheesebox",
+      "client": "cheeseman",
+      "id": 15
     }
   ],
   "log": [

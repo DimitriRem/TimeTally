@@ -221,9 +221,9 @@ const EditEntry = ({
             Update
           </button>
         </form>
-        <span className="deleteCancel" onClick={cancelEdit}>
+        <button className="cancelButton" onClick={cancelEdit}>
           Cancel
-        </span>
+        </button>
       </td>
     </tr>
   );

@@ -37,9 +37,9 @@ const DeleteEntry = ({
           Yes, delete it!
         </button>
         <br />
-        <span className="deleteCancel" onClick={cancelDelete}>
-          No, cancel.
-        </span>
+        <button className="cancelButton" onClick={cancelDelete}>
+          Cancel
+        </button>
       </td>
     </tr>
   );

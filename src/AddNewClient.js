@@ -17,32 +17,34 @@ const AddNewClient = ({
   };
 
   useEffect(() => {
-    const details = { name: addClientName };
-    setNewClientDetails(details);
-  }, [addClientName, setNewClientDetails]);
+    setNewClientDetails({ name: addClientName });
+  }, [addClientName]);
 
   return (
-    <div id="addClientContainer" className="entryContainer">
-      <div className="entryHeader">
-        <span>Add a Client</span>
-        <button className="cancelButton" onClick={addNewClientClose}>
-          Cancel
-        </button>
+    <div id="blackout">
+      <div id="addClientContainer" className="entryContainer">
+        <div className="entryHeader">
+          <span>Add a Client</span>
+        </div>
+        <form onSubmit={handleAddClient} id="addClientForm">
+          <label htmlFor="ClientNameBox">Client Name:</label>
+          <input
+            type="text"
+            id="addClientName"
+            name="addClientName"
+            value={addClientName}
+            onChange={handleNameChange}
+            placeholder="Enter client name"
+          />
+          <button type="submit" id="addClientButton" className="mainButton">
+            Add Client
+          </button>
+          <br />
+          <button className="cancelButton" onClick={addNewClientClose}>
+            Cancel
+          </button>
+        </form>
       </div>
-      <form onSubmit={handleAddClient} id="addClientForm">
-        <label htmlFor="ClientNameBox">Client Name:</label>
-        <input
-          type="text"
-          id="addClientName"
-          name="addClientName"
-          value={addClientName}
-          onChange={handleNameChange}
-          placeholder="Enter client name"
-        />
-        <button type="submit" id="addClientButton" className="mainButton">
-          Add Client
-        </button>
-      </form>
     </div>
   );
 };

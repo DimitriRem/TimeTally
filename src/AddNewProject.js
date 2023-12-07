@@ -46,9 +46,6 @@ const AddNewProject = ({
       <div id="addProjectContainer" className="entryContainer">
         <div className="entryHeader">
           <span>Add a Project</span>
-          <button className="cancelButton" onClick={addNewProjectClose}>
-            Cancel
-          </button>
         </div>
         <form onSubmit={handleAddProject} id="addProjectForm">
           <label htmlFor="projectNameBox">Project Name:</label>
@@ -77,6 +74,10 @@ const AddNewProject = ({
 
           <button type="submit" id="addProjectButton" className="mainButton">
             Add Project
+          </button>
+          <br />
+          <button className="cancelButton" onClick={addNewProjectClose}>
+            Cancel
           </button>
         </form>
       </div>
