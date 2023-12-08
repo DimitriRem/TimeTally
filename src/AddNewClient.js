@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import DataContext from "./context/DataContext";
 
-const AddNewClient = ({
-  addClient,
-  addNewClientClose,
-  setNewClientDetails,
-}) => {
+const AddNewClient = () => {
   const [addClientName, setAddClientName] = useState("");
+  const [newClientDetails, setNewClientDetails] = useState("");
+  const {
+    clients,
+    setClients,
+    setStatus,
+    setFetchError,
+    addNewClientClose,
+    setAddNewClientIsVisible,
+    api,
+  } = useContext(DataContext);
 
   const handleNameChange = (event) => {
     setAddClientName(event.target.value);
@@ -14,6 +21,15 @@ const AddNewClient = ({
   const handleAddClient = (e) => {
     e.preventDefault();
     addClient(addClientName);
+  };
+
+  const addClient = async () => {
+    const listClients = [...clients, newClientDetails];
+    setClients(listClients);
+    setAddNewClientIsVisible(false);
+    const result = await api("/clients", "POST", newClientDetails);
+    setStatus("New client added.");
+    if (result) setFetchError(result);
   };
 
   useEffect(() => {

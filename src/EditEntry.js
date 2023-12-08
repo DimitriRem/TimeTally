@@ -1,22 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ProjectOption from "./ProjectOption";
 import RateOption from "./RateOption";
+import DataContext from "./context/DataContext";
 
 const EditEntry = ({
   id,
   project,
-  projects,
-  rates,
   details,
   rate,
   startDate,
   endDate,
-  addNewProjectPop,
-  addNewRatePop,
   setIsEditModalOpen,
-  API_URL,
-  setStatus,
 }) => {
+  const {
+    projects,
+    rates,
+    api,
+    setStatus,
+    addNewProjectPop,
+    addNewRatePop,
+    setFetchError,
+  } = useContext(DataContext);
+
   let currentProjectIndex = projects.findIndex((proj) => proj.name === project);
   let currentRateIndex = rates.findIndex((rat) => rat.rate === rate);
 
@@ -33,7 +38,6 @@ const EditEntry = ({
       hour12: false,
     })
   );
-
   const [updatedDate, setUpdatedDate] = useState(
     startDate.toISOString().split("T")[0]
   );
@@ -116,14 +120,9 @@ const EditEntry = ({
     window.location.reload();
   };
 
-  const updateEntry = (updatedItem) => {
-    fetch(`${API_URL}log/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedItem),
-    });
+  const updateEntry = async (updatedItem) => {
+    const result = api(`log/${id}`, "PUT", updatedItem);
+    if (result) setFetchError(result);
     setStatus("Entry updated");
   };
 

@@ -1,12 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
+import DataContext from "./context/DataContext";
 
-const AddNewRate = ({
-  addRate,
-  addNewRateClose,
-  newRateDetails,
-  setNewRateDetails,
-}) => {
+const AddNewRate = () => {
+  const {
+    addNewRateClose,
+    setRates,
+    rates,
+    setAddNewRateIsVisible,
+    api,
+    setStatus,
+    setFetchError,
+  } = useContext(DataContext);
+
   const [addRateLabel, setAddRateLabel] = useState("");
+  const [newRateDetails, setNewRateDetails] = useState({});
   const [addRateNumber, setAddRateNumber] = useState("");
 
   const handleLabelChange = (event) => {
@@ -27,6 +34,15 @@ const AddNewRate = ({
       label: addRateLabel,
     });
   }, [addRateNumber, addRateLabel]);
+
+  const addRate = async () => {
+    const listRates = [...rates, newRateDetails];
+    setRates(listRates);
+    setAddNewRateIsVisible(false);
+    const result = await api("/rates", "POST", newRateDetails);
+    setStatus("New rate added.");
+    if (result) setFetchError(result);
+  };
 
   return (
     <div id="blackout">

@@ -10,12 +10,6 @@ const LogTableRow = ({
   rate,
   startTime,
   endTime,
-  API_URL,
-  rates,
-  projects,
-  addNewProjectPop,
-  addNewRatePop,
-  setStatus,
 }) => {
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
@@ -93,26 +87,18 @@ const LogTableRow = ({
           details={details}
           project={project}
           id={id}
-          API_URL={API_URL}
           setIsDeleteModalOpen={setIsDeleteModalOpen}
-          setStatus={setStatus}
         />
       )}
       {isEditModalOpen && (
         <EditEntry
           project={project}
           id={id}
-          projects={projects}
-          rates={rates}
           details={details}
           rate={rate}
           startDate={startDate}
           endDate={endDate}
-          addNewProjectPop={addNewProjectPop}
-          addNewRatePop={addNewRatePop}
           setIsEditModalOpen={setIsEditModalOpen}
-          API_URL={API_URL}
-          setStatus={setStatus}
         />
       )}
     </>

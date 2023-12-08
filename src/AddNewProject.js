@@ -1,16 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ClientOption from "./ClientOption";
+import DataContext from "./context/DataContext";
 
-const AddNewProject = ({
-  addProject,
-  addNewProjectClose,
-  clients,
-  newProjectDetails,
-  setNewProjectDetails,
-  addNewClientPop,
-}) => {
+const AddNewProject = () => {
+  const {
+    addNewProjectClose,
+    clients,
+    projects,
+    addNewClientPop,
+    setProjects,
+    setAddNewProjectIsVisible,
+    setFetchError,
+    api,
+    setStatus,
+  } = useContext(DataContext);
   const [addProjectName, setAddProjectName] = useState("");
   const [currentClientIndex, setCurrentClientIndex] = useState("0");
+  const [newProjectDetails, setNewProjectDetails] = useState({});
 
   const handleNameChange = (event) => {
     setAddProjectName(event.target.value);
@@ -39,6 +45,15 @@ const AddNewProject = ({
   const handleAddProject = (e) => {
     e.preventDefault();
     addProject(newProjectDetails);
+  };
+
+  const addProject = async () => {
+    const listProjects = [...projects, newProjectDetails];
+    setProjects(listProjects);
+    setAddNewProjectIsVisible(false);
+    const result = await api("/projects", "POST", newProjectDetails);
+    setStatus("new project added.");
+    if (result) setFetchError(result);
   };
 
   return (

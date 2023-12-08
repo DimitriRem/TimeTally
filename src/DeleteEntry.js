@@ -1,13 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
+import DataContext from "./context/DataContext";
 
-const DeleteEntry = ({
-  details,
-  project,
-  id,
-  API_URL,
-  setIsDeleteModalOpen,
-  setStatus,
-}) => {
+const DeleteEntry = ({ details, project, id, setIsDeleteModalOpen }) => {
+  const { api, setStatus, setFetchError } = useContext(DataContext);
   const confirmDelete = () => {
     deleteEntry(id);
 
@@ -18,10 +13,9 @@ const DeleteEntry = ({
     setIsDeleteModalOpen(false);
   };
 
-  const deleteEntry = (id) => {
-    fetch(`${API_URL}log/${id}`, {
-      method: "DELETE",
-    });
+  const deleteEntry = async (id) => {
+    const result = api(`log/${id}`, "DELETE");
+    if (result) setFetchError(result);
     setStatus("Entry deleted");
   };
 

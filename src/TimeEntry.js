@@ -1,16 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ProjectOption from "./ProjectOption";
 import RateOption from "./RateOption";
+import DataContext from "./context/DataContext";
 
-const TimeEntry = ({
-  projects,
-  rates,
-  handleSubmit,
-  newItem,
-  setNewItem,
-  addNewProjectPop,
-  addNewRatePop,
-}) => {
+const TimeEntry = () => {
+  const {
+    projects,
+    setItems,
+    rates,
+    newItem,
+    items,
+    setStatus,
+    setFetchError,
+    setNewItem,
+    addNewProjectPop,
+    addNewRatePop,
+    api,
+  } = useContext(DataContext);
+
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [currentRateIndex, setCurrentRateIndex] = useState(0);
   const [startTime, setStartTime] = useState("");
@@ -23,6 +30,7 @@ const TimeEntry = ({
   );
   const [finalStartTime, setFinalStartTime] = useState("");
   const [finalEndTime, setFinalEndTime] = useState("");
+
   const mainTextColorStyle = {
     color: "var(--mainTextColor)",
   };
@@ -107,6 +115,22 @@ const TimeEntry = ({
   const handleFormSubmit = (e) => {
     e.preventDefault();
     handleSubmit(newItem);
+  };
+
+  const addItem = async () => {
+    const listItems = [...items, newItem];
+    setItems(listItems);
+    const result = await api("/log", "POST", newItem);
+    setStatus("Hours submitted");
+    if (result) setFetchError(result);
+  };
+
+  const handleSubmit = (newItem) => {
+    if (!newItem) {
+      return;
+    }
+    addItem(newItem);
+    setNewItem("");
   };
 
   return (

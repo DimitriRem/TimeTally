@@ -1,15 +1,9 @@
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useContext } from "react";
 import LogTableRow from "./LogTableRow";
+import DataContext from "./context/DataContext";
 
-const LogTable = ({
-  items,
-  API_URL,
-  rates,
-  projects,
-  addNewProjectPop,
-  addNewRatePop,
-  setStatus,
-}) => {
+const LogTable = () => {
+  const { items, isLoading, fetchError } = useContext(DataContext);
   const groupLogsByDate = useCallback((items) => {
     const groupedLogs = {};
     items.forEach((log) => {
@@ -29,12 +23,14 @@ const LogTable = ({
   );
 
   const renderTable = useCallback(() => {
-    const groupedLogs = groupLogsByDate(sortedLogs);
     let lastDate = null;
     return (
       <>
+        {isLoading && <p>Loading items...</p>}
+        {fetchError && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
+
         <div className="re-heading">Time Logged</div>
-        {items.length ? (
+        {!fetchError && !isLoading && items.length ? (
           <table className="re-table">
             <thead>
               <tr>
@@ -79,12 +75,6 @@ const LogTable = ({
                         rate={log.rate}
                         startTime={log.startTime}
                         endTime={log.endTime}
-                        API_URL={API_URL}
-                        rates={rates}
-                        projects={projects}
-                        addNewProjectPop={addNewProjectPop}
-                        addNewRatePop={addNewRatePop}
-                        setStatus={setStatus}
                       />
                     </React.Fragment>
                   );
@@ -99,10 +89,6 @@ const LogTable = ({
                       rate={log.rate}
                       startTime={log.startTime}
                       endTime={log.endTime}
-                      API_URL={API_URL}
-                      rates={rates}
-                      projects={projects}
-                      setStatus={setStatus}
                     />
                   );
                 }
@@ -114,16 +100,7 @@ const LogTable = ({
         )}
       </>
     );
-  }, [
-    items,
-    sortedLogs,
-    groupLogsByDate,
-    API_URL,
-    rates,
-    projects,
-    addNewProjectPop,
-    addNewRatePop,
-  ]);
+  }, [items, sortedLogs, groupLogsByDate]);
 
   return <div>{renderTable()}</div>;
 };
