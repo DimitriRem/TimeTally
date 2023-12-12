@@ -6,6 +6,7 @@ const AddNewProject = () => {
   const {
     addNewProjectClose,
     clients,
+    currentNav,
     projects,
     addNewClientPop,
     setProjects,
@@ -13,8 +14,10 @@ const AddNewProject = () => {
     setFetchError,
     api,
     setStatus,
+    fetchData,
   } = useContext(DataContext);
   const [addProjectName, setAddProjectName] = useState("");
+  const [clientSelected, setClientSelected] = useState(false);
   const [currentClientIndex, setCurrentClientIndex] = useState("0");
   const [newProjectDetails, setNewProjectDetails] = useState({});
 
@@ -22,7 +25,10 @@ const AddNewProject = () => {
     setAddProjectName(event.target.value);
   };
 
+  const hideCancel = currentNav === "projects";
+
   const handleClientChange = (event) => {
+    setClientSelected(true);
     const selectedValue = Number(event.target.value);
     if (selectedValue === -2) {
       addNewClientPop();
@@ -44,6 +50,10 @@ const AddNewProject = () => {
 
   const handleAddProject = (e) => {
     e.preventDefault();
+    if (!clientSelected) {
+      setStatus("No Client Selected!");
+      return;
+    }
     addProject(newProjectDetails);
   };
 
@@ -54,48 +64,53 @@ const AddNewProject = () => {
     const result = await api("/projects", "POST", newProjectDetails);
     setStatus("new project added.");
     if (result) setFetchError(result);
+    fetchData();
   };
 
   return (
-    <div id="blackout">
-      <div id="addProjectContainer" className="entryContainer">
-        <div className="entryHeader">
-          <span>Add a Project</span>
-        </div>
-        <form onSubmit={handleAddProject} id="addProjectForm">
-          <label htmlFor="projectNameBox">Project Name:</label>
-          <input
-            type="text"
-            id="addProjectName"
-            name="addProjectName"
-            onChange={handleNameChange}
-            placeholder="Enter project name"
-          ></input>
-          <br />
-          <label htmlFor="clientList">Client:</label>
-          <select
-            id="clientList"
-            name="clientList"
-            onChange={handleClientChange}
-          >
-            <option value="null">Select Client</option>
-            <option value="-2" className="utility">
-              + Add a new Client
-            </option>
-            {clients.map((client) => (
-              <ClientOption key={client.id} id={client.id} name={client.name} />
-            ))}
-          </select>
-
-          <button type="submit" id="addProjectButton" className="mainButton">
-            Add Project
-          </button>
-          <br />
-          <button className="cancelButton" onClick={addNewProjectClose}>
-            Cancel
-          </button>
-        </form>
+    <div id="addProjectContainer" className="entryContainer">
+      <div className="entryHeader">
+        <span>Add a Project</span>
       </div>
+      <form onSubmit={handleAddProject} id="addProjectForm">
+        <label htmlFor="projectNameBox">Project Name:</label>
+        <input
+          type="text"
+          id="addProjectName"
+          name="addProjectName"
+          onChange={handleNameChange}
+          placeholder="Enter project name"
+          required
+        ></input>
+        <br />
+        <label htmlFor="clientList">Client:</label>
+        <select
+          id="clientList"
+          name="clientList"
+          onChange={handleClientChange}
+          required
+        >
+          <option value="-1">Select Client</option>
+          <option value="-2" className="utility">
+            + Add a new Client
+          </option>
+          {clients.map((client) => (
+            <ClientOption key={client.id} id={client.id} name={client.name} />
+          ))}
+        </select>
+
+        <button type="submit" id="addProjectButton" className="mainButton">
+          Add Project
+        </button>
+        <br />
+        <button
+          className="cancelButton"
+          onClick={addNewProjectClose}
+          hidden={hideCancel}
+        >
+          Cancel
+        </button>
+      </form>
     </div>
   );
 };

@@ -6,17 +6,21 @@ const AddNewClient = () => {
   const [newClientDetails, setNewClientDetails] = useState("");
   const {
     clients,
+    currentNav,
     setClients,
     setStatus,
     setFetchError,
     addNewClientClose,
     setAddNewClientIsVisible,
     api,
+    fetchData,
   } = useContext(DataContext);
 
   const handleNameChange = (event) => {
     setAddClientName(event.target.value);
   };
+
+  const hideCancel = currentNav === "clients";
 
   const handleAddClient = (e) => {
     e.preventDefault();
@@ -30,6 +34,7 @@ const AddNewClient = () => {
     const result = await api("/clients", "POST", newClientDetails);
     setStatus("New client added.");
     if (result) setFetchError(result);
+    fetchData();
   };
 
   useEffect(() => {
@@ -37,30 +42,33 @@ const AddNewClient = () => {
   }, [addClientName]);
 
   return (
-    <div id="blackout">
-      <div id="addClientContainer" className="entryContainer">
-        <div className="entryHeader">
-          <span>Add a Client</span>
-        </div>
-        <form onSubmit={handleAddClient} id="addClientForm">
-          <label htmlFor="ClientNameBox">Client Name:</label>
-          <input
-            type="text"
-            id="addClientName"
-            name="addClientName"
-            value={addClientName}
-            onChange={handleNameChange}
-            placeholder="Enter client name"
-          />
-          <button type="submit" id="addClientButton" className="mainButton">
-            Add Client
-          </button>
-          <br />
-          <button className="cancelButton" onClick={addNewClientClose}>
-            Cancel
-          </button>
-        </form>
+    <div id="addClientContainer" className="entryContainer">
+      <div className="entryHeader">
+        <span>Add a Client</span>
       </div>
+      <form onSubmit={handleAddClient} id="addClientForm">
+        <label htmlFor="ClientNameBox">Client Name:</label>
+        <input
+          type="text"
+          id="addClientName"
+          name="addClientName"
+          value={addClientName}
+          onChange={handleNameChange}
+          placeholder="Enter client name"
+          required
+        />
+        <button type="submit" id="addClientButton" className="mainButton">
+          Add Client
+        </button>
+        <br />
+        <button
+          className="cancelButton"
+          onClick={addNewClientClose}
+          hidden={hideCancel}
+        >
+          Cancel
+        </button>
+      </form>
     </div>
   );
 };

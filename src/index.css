@@ -29,6 +29,12 @@
   --blackout: #000000b3;
   --cancelButtonBG: #eee;
   --cancelButtonText: #4f4f4f;
+  --filterBoxBorder: #8a8a8a;
+  --filterBoxBorderActivated: #53457a;
+  --filterBoxBGActivated: #332f40;
+  --filterBoxText: #8a8a8a;
+  --filterBoxInputBG: #525151;
+  --filterBoxInputText: #a9a9a9;
 }
 
 html {
@@ -48,9 +54,19 @@ header {
   align-items: center;
   height: 50px;
 }
+#headerLeft {
+  flex-grow: 1;
+}
+#headerMiddle {
+  flex-grow: 1;
+  text-align: center;
+  overflow: hidden;
+}
 #headerRight {
+  flex-grow: 1;
   height: 40px;
   line-height: 40px;
+  text-align: right;
 }
 
 h1 {
@@ -63,6 +79,7 @@ body {
   height: 100%;
 }
 #desktopContainer {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -71,18 +88,14 @@ body {
 
 #toolbox {
   max-width: 360px;
-  margin: 0 auto;
   height: 92vh;
   background-color: var(--toolboxBG);
 }
 
 .status {
   width: 400px;
-  z-index: 20;
-  background-color: var(--statusBG);
-  position: absolute;
-  left: 200px;
-  top: -200px;
+  border: 1px solid var(--mainTextColor);
+  height: 40px;
   border-radius: 10px;
   opacity: 0;
   padding: 5px 10px;
@@ -90,11 +103,11 @@ body {
   font-size: 1.2rem;
   align-content: center;
   transition: all 0.3s ease-in-out;
+  color: var(--mainTextColor);
 }
 
 .status.show {
   opacity: 1;
-  top: 5px;
 }
 
 #tableContainer {
@@ -103,8 +116,40 @@ body {
   width: 100%;
 }
 
-/* v------ ENTRY BLOCKS ------v */
+/* v------ TOOLBAR ------v */
+#toolbar {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  align-items: baseline;
+  gap: 10px;
+  padding: 10px 0;
+}
 
+.toolButton {
+  padding: 10px;
+  background-color: var(--entryContainerBG);
+  color: var(--mainTextColor);
+  border: 1px solid var(--filterBoxText);
+  border-radius: 10px;
+  cursor: pointer;
+}
+.toolButton:hover {
+  background-color: var(--mainButtonBG);
+  color: var(--highlightText);
+  border-color: var(--mainButtonBorder);
+}
+.toolButtonCurrent {
+  padding: 10px;
+  color: var(--mainTextColor);
+  background-color: var(--entryBoxHeaderBG);
+  border: 0;
+  border-radius: 10px;
+}
+
+/* ^------ TOOLBAR end------^ */
+
+/* v------ ENTRY BLOCKS ------v */
 .entryContainer {
   padding: 10px;
   width: 350px;
@@ -123,12 +168,15 @@ body {
 
 #addProjectContainer {
   position: relative;
+  top: 70px;
 }
 #addClientContainer {
   position: relative;
+  top: 70px;
 }
 #addRateContainer {
   position: relative;
+  top: 70px;
 }
 
 .entryHeader {
@@ -199,14 +247,6 @@ submit {
   cursor: pointer;
 }
 
-.re-heading {
-  width: 90%;
-  margin: 0 auto;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--mainTextColor);
-}
-
 /* v------ FORM STYLES ------v */
 input,
 select,
@@ -226,6 +266,62 @@ textarea {
 
 /* v------ TABLE STYLES ------v */
 
+#tableTop {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 10px auto;
+  color: var(--mainTextColor);
+}
+
+.re-heading {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--mainTextColor);
+}
+.dateFilter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid var(--filterBoxText);
+  border-radius: 20px;
+  background-color: var(--toolboxBG);
+  color: var(--filterBoxText);
+  height: 35px;
+  overflow: hidden;
+}
+
+.dateFilterActivated {
+  border: 2px solid var(--filterBoxBorderActivated);
+  background-color: var(--filterBoxBGActivated);
+}
+
+.dateFilter input {
+  background-color: var(--filterBoxInputBG);
+  color: var(--filterBoxInputText);
+}
+.filterHeader {
+  background-color: var(--entryContainerBG);
+  color: var(--mainTextColor);
+  height: 100%;
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.filterHeaderActivated {
+  background-color: var(--entryBoxHeaderBG);
+  color: var(--mainTextColor);
+  height: 100%;
+  padding: 0 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .re-table {
   border-collapse: collapse;
   margin: 10px auto;
@@ -307,7 +403,11 @@ textarea {
   cursor: pointer;
 }
 
-/* ^------ TABLE STYLES ------^ */
+.unavailable {
+  opacity: 30%;
+}
+
+/* ^------ TABLE STYLES end ------^ */
 
 @media (max-width: 850px) {
   #desktopContainer {
@@ -320,6 +420,10 @@ textarea {
   }
   #tableContainer {
     overflow: auto;
+  }
+  #tableTop {
+    flex-direction: column;
+    font-size: 0.8rem;
   }
   .re-table {
     font-size: 0.5rem;

@@ -14,9 +14,14 @@ const Header = () => {
   const date = currentDate.toLocaleDateString("en-UK", dateOptions);
   return (
     <header>
-      <h1>TimeTally</h1>
+      <div id="headerLeft">
+        <h1>TimeTally</h1>
+      </div>
+
+      <div id="headerMiddle">
+        <div className={`status ${status !== "" ? "show" : ""}`}>{status}</div>
+      </div>
       <div id="headerRight">{date}</div>
-      {/* <div className={`status ${status !== "" ? "show" : ""}`}>{status}</div> */}
     </header>
   );
 };

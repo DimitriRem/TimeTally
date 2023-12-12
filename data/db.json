@@ -24,6 +24,16 @@
       "rate": "aasassa",
       "label": "special Jason discount",
       "id": 5
+    },
+    {
+      "rate": "5",
+      "label": "Discount",
+      "id": 6
+    },
+    {
+      "rate": "7",
+      "label": "Discount 2",
+      "id": 7
     }
   ],
   "clients": [
@@ -74,6 +84,14 @@
     {
       "name": "jason",
       "id": 12
+    },
+    {
+      "name": "client joe",
+      "id": 13
+    },
+    {
+      "name": "Jack",
+      "id": 14
     }
   ],
   "projects": [
@@ -103,59 +121,9 @@
       "client": "Acmecorp"
     },
     {
-      "name": "jayvayp2",
-      "client": "JayVay",
-      "id": 6
-    },
-    {
-      "name": "new proj 2",
-      "client": "New Client 2",
-      "id": 7
-    },
-    {
-      "name": "Friday Funday",
-      "client": "Firday & Co",
-      "id": 8
-    },
-    {
-      "name": "FF3",
-      "client": "Firday & Co",
-      "id": 9
-    },
-    {
-      "name": "ff4",
-      "client": "Firday & Co",
-      "id": 10
-    },
-    {
-      "name": "ff5",
-      "client": "saturday &Co",
-      "id": 11
-    },
-    {
-      "name": "zaza",
-      "client": "JayVay",
+      "name": "smacks 4 jack",
+      "client": "Jack",
       "id": 12
-    },
-    {
-      "name": "zazaza",
-      "client": "zaza",
-      "id": 13
-    },
-    {
-      "name": "Saturday fun",
-      "client": "saturday &Co",
-      "id": 14
-    },
-    {
-      "name": "cheesebox",
-      "client": "cheeseman",
-      "id": 15
-    },
-    {
-      "name": "Acmecorp brochure",
-      "client": "Acmecorp",
-      "id": 16
     }
   ],
   "log": [
@@ -185,15 +153,6 @@
       "rate": 10,
       "startTime": "2022-09-15T15:30:00.000Z",
       "endTime": "2022-09-15T17:30:00.000Z"
-    },
-    {
-      "id": 10,
-      "project": "Make Inc Website",
-      "details": "sixth sense d",
-      "client": "Make Inc",
-      "rate": 20,
-      "startTime": "2023-11-09T09:00:00.000Z",
-      "endTime": "2023-11-09T21:00:00.000Z"
     },
     {
       "id": 15,
@@ -250,58 +209,31 @@
       "id": 33
     },
     {
-      "project": "Make Inc Website",
-      "details": "nooooooooo",
-      "client": "Make Inc",
-      "rate": 10,
-      "startTime": "2023-12-06T07:00:00.000Z",
-      "endTime": "2023-12-06T08:00:00.000Z",
-      "id": 35
-    },
-    {
-      "project": "ff5",
-      "details": "sadsak2",
-      "client": "saturday &Co",
-      "rate": 10,
-      "startTime": "2023-12-06T02:00:00.000Z",
-      "endTime": "2023-12-06T03:00:00.000Z",
-      "id": 37
-    },
-    {
-      "project": "ff5",
-      "details": "sadsak2gggggeeeggg",
-      "client": "saturday &Co",
-      "rate": 10,
-      "startTime": "2023-12-06T05:00:00.000Z",
-      "endTime": "2023-12-06T06:00:00.000Z",
-      "id": 38
-    },
-    {
-      "project": "Acmecorp Email",
-      "details": "email editing",
+      "id": 40,
+      "project": "Acmecorp Video",
+      "details": "testing 123",
       "client": "Acmecorp",
       "rate": 10,
-      "startTime": "2023-12-07T07:30:00.000Z",
-      "endTime": "2023-12-07T15:00:00.000Z",
-      "id": 39
-    },
-    {
-      "project": "Acmecorp brochure",
-      "details": "23432441324132",
-      "client": "Acmecorp",
-      "rate": 10,
-      "startTime": "2023-12-07T08:00:00.000Z",
-      "endTime": "2023-12-07T09:00:00.000Z",
-      "id": 40
+      "startTime": "2023-12-11T12:00:00.000Z",
+      "endTime": "2023-12-11T13:00:00.000Z"
     },
     {
       "project": "Make Inc Website",
-      "details": "cxxzcxdfdfdfdffd35erwerdsfdf",
+      "details": "zzzoooop",
       "client": "Make Inc",
       "rate": 10,
-      "startTime": "2023-12-08T03:45:00.000Z",
-      "endTime": "2023-12-08T01:45:00.000Z",
-      "id": 41
+      "startTime": "2023-12-12T13:00:00.000Z",
+      "endTime": "2023-12-12T13:30:00.000Z",
+      "id": 42
+    },
+    {
+      "project": "smacks 4 jack",
+      "details": "smacks galore",
+      "client": "Jack",
+      "rate": 10,
+      "startTime": "2023-12-12T07:00:00.000Z",
+      "endTime": "2023-12-12T09:00:00.000Z",
+      "id": 43
     }
   ]
 }

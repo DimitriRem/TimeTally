@@ -6,16 +6,17 @@ import DataContext from "./context/DataContext";
 const TimeEntry = () => {
   const {
     projects,
-    setItems,
+    setlogItems,
     rates,
-    newItem,
-    items,
+    newlogItem,
+    logItems,
     setStatus,
     setFetchError,
-    setNewItem,
+    setNewlogItem,
     addNewProjectPop,
     addNewRatePop,
     api,
+    fetchData,
   } = useContext(DataContext);
 
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
@@ -96,7 +97,7 @@ const TimeEntry = () => {
   }, [totalHours, currentRateIndex]);
 
   useEffect(() => {
-    setNewItem({
+    setNewlogItem({
       project: projects[currentProjectIndex].name,
       details: details,
       client: projects[currentProjectIndex].client,
@@ -114,23 +115,24 @@ const TimeEntry = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    handleSubmit(newItem);
+    handleSubmit(newlogItem);
   };
 
-  const addItem = async () => {
-    const listItems = [...items, newItem];
-    setItems(listItems);
-    const result = await api("/log", "POST", newItem);
-    setStatus("Hours submitted");
-    if (result) setFetchError(result);
-  };
-
-  const handleSubmit = (newItem) => {
-    if (!newItem) {
+  const handleSubmit = (newlogItem) => {
+    if (!newlogItem) {
       return;
     }
-    addItem(newItem);
-    setNewItem("");
+    addlogItem(newlogItem);
+    setNewlogItem("");
+  };
+
+  const addlogItem = async () => {
+    const listlogItems = [...logItems, newlogItem];
+    setlogItems(listlogItems);
+    const result = await api("/log", "POST", newlogItem);
+    setStatus("Hours submitted");
+    if (result) setFetchError(result);
+    fetchData();
   };
 
   return (

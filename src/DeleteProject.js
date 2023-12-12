@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import DataContext from "./context/DataContext";
 
-const DeleteEntry = ({ details, project, id, setIsDeleteModalOpen }) => {
+const DeleteProject = ({ name, id, setIsDeleteModalOpen }) => {
   const { api, setStatus, setFetchError, fetchData } = useContext(DataContext);
+
   const confirmDelete = () => {
-    deleteEntry(id);
+    deleteProject(id);
 
     setIsDeleteModalOpen(false);
     fetchData();
@@ -13,19 +14,16 @@ const DeleteEntry = ({ details, project, id, setIsDeleteModalOpen }) => {
     setIsDeleteModalOpen(false);
   };
 
-  const deleteEntry = async (id) => {
-    const result = api(`/log/${id}`, "DELETE");
+  const deleteProject = async (id) => {
+    const result = api(`/projects/${id}`, "DELETE");
     if (result) setFetchError(result);
-    setStatus("Entry deleted");
+    setStatus("Project deleted");
   };
 
   return (
     <tr>
-      <td colSpan="9" className="deleteConfirm">
-        Are you sure you want to delete the above entry? <br />
-        <span style={{ fontWeight: "normal" }}>
-          ({details} for {project})
-        </span>
+      <td colSpan="3" className="deleteConfirm">
+        Are you sure you want to delete project "{name}"? <br />
         <br />
         <button onClick={confirmDelete} className="confirmButton">
           Yes, delete it!
@@ -39,4 +37,4 @@ const DeleteEntry = ({ details, project, id, setIsDeleteModalOpen }) => {
   );
 };
 
-export default DeleteEntry;
+export default DeleteProject;

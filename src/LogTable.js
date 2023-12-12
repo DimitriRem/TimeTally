@@ -1,36 +1,95 @@
-import React, { useMemo, useCallback, useContext } from "react";
+import React, { useMemo, useContext, useState } from "react";
 import LogTableRow from "./LogTableRow";
 import DataContext from "./context/DataContext";
 
 const LogTable = () => {
-  const { items, isLoading, fetchError } = useContext(DataContext);
-  const groupLogsByDate = useCallback((items) => {
-    const groupedLogs = {};
-    items.forEach((log) => {
-      const startDate = new Date(log.startTime).toLocaleDateString();
-      if (!groupedLogs[startDate]) {
-        groupedLogs[startDate] = [];
-      }
-      groupedLogs[startDate].push(log);
-    });
-    return groupedLogs;
-  }, []);
+  const { logItems, isLoading, fetchError } = useContext(DataContext);
+  const [startDate, setStartDate] = useState("");
+  const [endDate, setEndDate] = useState("");
+  const [filterActive, setFilterActive] = useState(false);
 
-  const sortedLogs = useMemo(
-    () =>
-      items.sort((a, b) => Date.parse(a.startTime) - Date.parse(b.startTime)),
-    [items]
-  );
+  const filteredLogs = useMemo(() => {
+    if (startDate && endDate) {
+      return logItems.filter((log) => {
+        const logDate = new Date(log.startTime).toISOString().slice(0, 10);
+        return logDate >= startDate && logDate <= endDate;
+      });
+    } else {
+      return logItems;
+    }
+  }, [logItems, startDate, endDate]);
 
-  const renderTable = useCallback(() => {
+  const sortedLogs = useMemo(() => {
+    return [...filteredLogs].sort(
+      (a, b) => Date.parse(b.startTime) - Date.parse(a.startTime)
+    );
+  }, [filteredLogs]);
+
+  const handleStartDateChange = (e) => {
+    setStartDate(e.target.value);
+  };
+
+  const handleEndDateChange = (e) => {
+    setEndDate(e.target.value);
+    setFilterActive(true);
+  };
+
+  const startInput = document.getElementById("startDate");
+  const endInput = document.getElementById("endDate");
+
+  const clearFilter = () => {
+    startInput.value = "";
+    endInput.value = "";
+    setStartDate("");
+    setEndDate("");
+    setFilterActive(false);
+  };
+
+  const renderTable = () => {
     let lastDate = null;
     return (
       <>
-        {isLoading && <p>Loading items...</p>}
+        {isLoading && <p>Loading logItems...</p>}
         {fetchError && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
+        <div id="tableTop">
+          <div className="re-heading">Time Logged</div>
 
-        <div className="re-heading">Time Logged</div>
-        {!fetchError && !isLoading && items.length ? (
+          <div
+            className={`dateFilter ${
+              filterActive ? "dateFilterActivated" : ""
+            }`}
+          >
+            <div
+              id="filterHeader"
+              className={`${
+                filterActive ? "filterHeaderActivated" : "filterHeader"
+              }`}
+            >
+              Display{`${filterActive ? "ing" : ""}`} Date Range:{" "}
+            </div>
+            <label htmlFor="startDate">Start Date: </label>
+            <input
+              type="date"
+              id="startDate"
+              value={startDate}
+              onChange={handleStartDateChange}
+            />{" "}
+            <label htmlFor="endDate">End Date: </label>{" "}
+            <input
+              type="date"
+              id="endDate"
+              value={endDate}
+              onChange={handleEndDateChange}
+            />
+            <span
+              className="material-symbols-outlined rowButton"
+              onClick={clearFilter}
+            >
+              cancel
+            </span>
+          </div>
+        </div>
+        {!fetchError && !isLoading && logItems.length ? (
           <table className="re-table">
             <thead>
               <tr>
@@ -100,7 +159,7 @@ const LogTable = () => {
         )}
       </>
     );
-  }, [items, sortedLogs, groupLogsByDate]);
+  };
 
   return <div>{renderTable()}</div>;
 };

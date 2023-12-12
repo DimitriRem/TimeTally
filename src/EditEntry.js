@@ -20,6 +20,7 @@ const EditEntry = ({
     addNewProjectPop,
     addNewRatePop,
     setFetchError,
+    fetchData,
   } = useContext(DataContext);
 
   let currentProjectIndex = projects.findIndex((proj) => proj.name === project);
@@ -49,7 +50,7 @@ const EditEntry = ({
       hour12: false,
     })
   );
-  const [updatedItem, setUpdatedItem] = useState({});
+  const [updatedlogItem, setUpdatedlogItem] = useState({});
 
   const cancelEdit = () => {
     setIsEditModalOpen(false);
@@ -95,7 +96,7 @@ const EditEntry = ({
   };
 
   useEffect(() => {
-    setUpdatedItem({
+    setUpdatedlogItem({
       id: id,
       project: projects[updatedProjectIndex].name,
       details: updatedProjectDetails,
@@ -115,13 +116,13 @@ const EditEntry = ({
 
   const handleEntryUpdate = (e) => {
     e.preventDefault();
-    updateEntry(updatedItem);
+    updateEntry(updatedlogItem);
     setIsEditModalOpen(false);
-    window.location.reload();
+    fetchData();
   };
 
-  const updateEntry = async (updatedItem) => {
-    const result = api(`log/${id}`, "PUT", updatedItem);
+  const updateEntry = async (updatedlogItem) => {
+    const result = api(`/log/${id}`, "PUT", updatedlogItem);
     if (result) setFetchError(result);
     setStatus("Entry updated");
   };

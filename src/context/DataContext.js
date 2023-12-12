@@ -4,60 +4,60 @@ import { api } from "../utils/api";
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
-  const [items, setItems] = useState([]);
+  const [logItems, setlogItems] = useState([]);
   const [clients, setClients] = useState([]);
   const [projects, setProjects] = useState([]);
   const [rates, setRates] = useState([]);
-  const [newItem, setNewItem] = useState("");
+  const [newlogItem, setNewlogItem] = useState("");
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [status, setStatus] = useState("");
   const [addNewProjectIsVisible, setAddNewProjectIsVisible] = useState(false);
   const [addNewClientIsVisible, setAddNewClientIsVisible] = useState(false);
   const [addNewRateIsVisible, setAddNewRateIsVisible] = useState(false);
+  const [currentNav, setCurrentNav] = useState("log");
 
+  const fetchData = async () => {
+    try {
+      const [
+        logItemsResponse,
+        clientsResponse,
+        projectsResponse,
+        ratesResponse,
+      ] = await Promise.all([
+        api("/log"),
+        api("/clients"),
+        api("/projects"),
+        api("/rates"),
+      ]);
+
+      if (!logItemsResponse.ok) throw Error("did not receive expected data");
+      const logItemsData = await logItemsResponse.json();
+      setlogItems(logItemsData);
+
+      if (!clientsResponse.ok)
+        throw Error("did not receive expected data(clients)");
+      const clientsData = await clientsResponse.json();
+      setClients(clientsData);
+
+      if (!projectsResponse.ok)
+        throw Error("did not receive expected data(projects)");
+      const projectsData = await projectsResponse.json();
+      setProjects(projectsData);
+
+      if (!ratesResponse.ok)
+        throw Error("did not receive expected data(rates)");
+      const ratesData = await ratesResponse.json();
+      setRates(ratesData);
+
+      setFetchError(null);
+    } catch (err) {
+      setFetchError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [
-          itemsResponse,
-          clientsResponse,
-          projectsResponse,
-          ratesResponse,
-        ] = await Promise.all([
-          api("/log"),
-          api("/clients"),
-          api("/projects"),
-          api("/rates"),
-        ]);
-
-        if (!itemsResponse.ok) throw Error("did not receive expected data");
-        const itemsData = await itemsResponse.json();
-        setItems(itemsData);
-
-        if (!clientsResponse.ok)
-          throw Error("did not receive expected data(clients)");
-        const clientsData = await clientsResponse.json();
-        setClients(clientsData);
-
-        if (!projectsResponse.ok)
-          throw Error("did not receive expected data(projects)");
-        const projectsData = await projectsResponse.json();
-        setProjects(projectsData);
-
-        if (!ratesResponse.ok)
-          throw Error("did not receive expected data(rates)");
-        const ratesData = await ratesResponse.json();
-        setRates(ratesData);
-
-        setFetchError(null);
-      } catch (err) {
-        setFetchError(err.message);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
     fetchData();
   }, []);
 
@@ -114,21 +114,26 @@ export const DataProvider = ({ children }) => {
         addNewRatePop,
         api,
         clients,
-        items,
+        currentNav,
+        logItems,
         isLoading,
+        fetchData,
         fetchError,
-        newItem,
+        newlogItem,
         projects,
         rates,
         setAddNewClientIsVisible,
         setAddNewProjectIsVisible,
         setAddNewRateIsVisible,
+        setClients,
+        setCurrentNav,
         setFetchError,
-        setItems,
-        setNewItem,
+        setlogItems,
+        setNewlogItem,
         setProjects,
         setRates,
         setStatus,
+        status,
       }}
     >
       {children}

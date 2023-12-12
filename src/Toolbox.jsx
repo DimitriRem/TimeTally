@@ -4,9 +4,11 @@ import TimeEntry from "./TimeEntry";
 import AddNewProject from "./AddNewProject";
 import AddNewClient from "./AddNewClient";
 import AddNewRate from "./AddNewRate";
+import Toolbar from "./Toolbar";
 
 const Toolbox = () => {
   const {
+    currentNav,
     fetchError,
     isLoading,
     addNewProjectIsVisible,
@@ -16,10 +18,26 @@ const Toolbox = () => {
 
   return (
     <>
-      {!fetchError && !isLoading && <TimeEntry />}
-      {addNewProjectIsVisible && <AddNewProject />}
-      {addNewClientIsVisible && <AddNewClient />}
-      {addNewRateIsVisible && <AddNewRate />}
+      <Toolbar />
+      {!fetchError && !isLoading && currentNav === "log" ? <TimeEntry /> : ""}
+      {addNewProjectIsVisible && (
+        <div id="blackout">
+          <AddNewProject />
+        </div>
+      )}
+      {currentNav === "projects" ? <AddNewProject /> : ""}
+      {addNewClientIsVisible && (
+        <div id="blackout">
+          <AddNewClient />
+        </div>
+      )}
+      {currentNav === "clients" ? <AddNewClient /> : ""}
+      {addNewRateIsVisible && (
+        <div id="blackout">
+          <AddNewRate />
+        </div>
+      )}
+      {currentNav === "rates" ? <AddNewRate /> : ""}
     </>
   );
 };
