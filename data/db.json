@@ -16,14 +16,19 @@
       "label": "FilmShoot"
     },
     {
-      "rate": "10",
-      "label": "Design",
+      "label": "Designing",
+      "rate": "15",
       "id": 4
     },
     {
       "rate": "5",
       "label": "Discount Dev",
       "id": 5
+    },
+    {
+      "rate": "8",
+      "label": "Research",
+      "id": 6
     }
   ],
   "clients": [
@@ -71,9 +76,9 @@
       "client": "Acmecorp"
     },
     {
+      "id": 6,
       "name": "GC Flyer",
-      "client": "Make Inc",
-      "id": 6
+      "client": "Greg Cooper"
     }
   ],
   "log": [
@@ -180,8 +185,8 @@
       "id": 39,
       "project": "GC Flyer",
       "details": "Flyer Design A5",
-      "client": "Make Inc",
-      "rate": "10",
+      "client": "Greg Cooper",
+      "rate": "15",
       "startTime": "2023-12-19T07:00:00.000Z",
       "endTime": "2023-12-19T15:00:00.000Z"
     },
@@ -189,10 +194,19 @@
       "id": 40,
       "project": "GC Flyer",
       "details": "Flyer Design A6",
-      "client": "Make Inc",
-      "rate": "10",
+      "client": "Greg Cooper",
+      "rate": "15",
       "startTime": "2023-11-08T11:00:00.000Z",
       "endTime": "2023-11-08T15:00:00.000Z"
+    },
+    {
+      "project": "GC Flyer",
+      "details": "Flyer Design",
+      "client": "Greg Cooper",
+      "rate": "15",
+      "startTime": "2023-12-13T07:00:00.000Z",
+      "endTime": "2023-12-13T14:30:00.000Z",
+      "id": 41
     }
   ]
 }

@@ -1,11 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import DataContext from "./context/DataContext";
 import ClientOption from "./ClientOption";
-import AddNewClient from "./AddNewClient";
 
 const EditProject = ({ name, id, client, setIsEditModalOpen }) => {
-  const { api, setStatus, setFetchError, fetchData, clients, addNewClientPop } =
-    useContext(DataContext);
+  const {
+    api,
+    setStatus,
+    setFetchError,
+    fetchData,
+    clients,
+    addNewClientPop,
+    logItems,
+  } = useContext(DataContext);
 
   let currentClientIndex = clients.findIndex((cl) => cl.name === client);
 
@@ -42,9 +48,32 @@ const EditProject = ({ name, id, client, setIsEditModalOpen }) => {
   const handleProjectUpdate = (e) => {
     e.preventDefault();
     updateProject(updatedProjectItem);
+    updateProjectInLog(name, updatedProjectName, logItems);
     setIsEditModalOpen(false);
     fetchData();
   };
+
+  function updateProjectInLog(name, updatedProjectName, logItems) {
+    // Check if any entries match the current project name
+    const entriesToUpdate = logItems.filter((entry) => entry.project === name);
+
+    if (entriesToUpdate.length) {
+      // Update each matching entry individually and collect promises
+      const updatePromises = entriesToUpdate.map((entry) =>
+        api(`/log/${entry.id}`, "PATCH", {
+          project: updatedProjectName,
+          client: clients[updatedClientIndex].name,
+        })
+      );
+
+      // Wait for all updates to finish before processing further
+      Promise.all(updatePromises)
+        .then(() => console.log("All projects updated successfully!"))
+        .catch((error) => console.error("Error updating projects:", error));
+    } else {
+      console.warn(`Project "${name}" not found in the log`);
+    }
+  }
 
   const updateProject = async (updatedProjectItem) => {
     const result = api(`/projects/${id}`, "PUT", updatedProjectItem);
@@ -75,12 +104,12 @@ const EditProject = ({ name, id, client, setIsEditModalOpen }) => {
             defaultValue={currentClientIndex + 1}
             onChange={handleClientUpdate}
           >
-            {clients.map((cl) => (
-              <ClientOption key={cl.id} id={cl.id} name={cl.name} />
-            ))}
             <option value="-2" className="utility">
               Add a new client
             </option>
+            {clients.map((cl) => (
+              <ClientOption key={cl.id} id={cl.id} name={cl.name} />
+            ))}
           </select>
           <br />
           <button type="submit" id="updateProjectButton" className="mainButton">
