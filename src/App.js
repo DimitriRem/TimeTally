@@ -18,7 +18,6 @@ function App() {
     year: "numeric",
   };
   const formattedDate = currentDate.toLocaleDateString("en-UK", dateOptions);
-
   const [items, setItems] = useState([]);
   const [clients, setClients] = useState([]);
   const [projects, setProjects] = useState([]);
