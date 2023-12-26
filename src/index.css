@@ -48,6 +48,7 @@ header {
   align-items: center;
   height: 50px;
 }
+
 #headerRight {
   height: 40px;
   line-height: 40px;
@@ -62,6 +63,7 @@ body {
   background-color: var(--mainBG1);
   height: 100%;
 }
+
 #desktopContainer {
   display: flex;
   flex-direction: row;
@@ -307,7 +309,7 @@ textarea {
   cursor: pointer;
 }
 
-/* ^------ TABLE STYLES ------^ */
+/* ^------ TABLE STYLES end ------^ */
 
 @media (max-width: 850px) {
   #desktopContainer {
