@@ -4,11 +4,11 @@ import { api } from "../utils/api";
 const DataContext = createContext({});
 
 export const DataProvider = ({ children }) => {
-  const [logItems, setlogItems] = useState([]);
+  const [logItems, setLogItems] = useState([]);
   const [clients, setClients] = useState([]);
   const [projects, setProjects] = useState([]);
   const [rates, setRates] = useState([]);
-  const [newlogItem, setNewlogItem] = useState("");
+  const [newLogItem, setNewLogItem] = useState("");
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [status, setStatus] = useState("");
@@ -33,7 +33,7 @@ export const DataProvider = ({ children }) => {
 
       if (!logItemsResponse.ok) throw Error("did not receive expected data");
       const logItemsData = await logItemsResponse.json();
-      setlogItems(logItemsData);
+      setLogItems(logItemsData);
 
       if (!clientsResponse.ok)
         throw Error("did not receive expected data(clients)");
@@ -119,7 +119,7 @@ export const DataProvider = ({ children }) => {
         isLoading,
         fetchData,
         fetchError,
-        newlogItem,
+        newLogItem,
         projects,
         rates,
         setAddNewClientIsVisible,
@@ -128,8 +128,8 @@ export const DataProvider = ({ children }) => {
         setClients,
         setCurrentNav,
         setFetchError,
-        setlogItems,
-        setNewlogItem,
+        setLogItems,
+        setNewLogItem,
         setProjects,
         setRates,
         setStatus,

@@ -29,7 +29,7 @@ const ProjectsTable = () => {
           <tbody>
             {sortedProjects.map((project) => (
               <ProjectsTableRow
-                key={project.id}
+                key={project.id.toString()}
                 id={project.id}
                 name={project.name}
                 client={project.client}

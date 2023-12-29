@@ -4,7 +4,7 @@ export const api = (url, method = "GET", body) => {
   const options = {
     method: method,
     headers: {
-      "Content-Type": "application/json",
+      "content-type": "application/json",
     },
     ...(body && {
       body: JSON.stringify(body),

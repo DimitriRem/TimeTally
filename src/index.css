@@ -146,7 +146,6 @@ body {
   border: 0;
   border-radius: 10px;
 }
-
 /* ^------ TOOLBAR end------^ */
 
 /* v------ ENTRY BLOCKS ------v */
@@ -201,7 +200,6 @@ body {
   cursor: pointer;
   border: 3px solid var(--cancelButtonText);
 }
-
 /* ^------ ENTRY BLOCKS end ------^ */
 
 #logForm {
@@ -261,11 +259,9 @@ textarea {
   min-width: 200px;
   min-height: 3rem;
 }
-
 /* ^------ FORM STYLES end ------^ */
 
 /* v------ TABLE STYLES ------v */
-
 #tableTop {
   width: 90%;
   display: flex;
@@ -406,7 +402,6 @@ textarea {
 .unavailable {
   opacity: 30%;
 }
-
 /* ^------ TABLE STYLES end ------^ */
 
 @media (max-width: 850px) {

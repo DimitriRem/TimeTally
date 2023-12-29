@@ -8,14 +8,25 @@ import RatesTable from "./RatesTable";
 const TableContainer = () => {
   const { currentNav } = useContext(DataContext);
 
-  return (
-    <>
-      {currentNav === "log" ? <LogTable /> : ""}
-      {currentNav === "projects" ? <ProjectsTable /> : ""}
-      {currentNav === "clients" ? <ClientsTable /> : ""}
-      {currentNav === "rates" ? <RatesTable /> : ""}
-    </>
-  );
+  let tableComponent;
+  switch (currentNav) {
+    case "log":
+      tableComponent = <LogTable />;
+      break;
+    case "projects":
+      tableComponent = <ProjectsTable />;
+      break;
+    case "clients":
+      tableComponent = <ClientsTable />;
+      break;
+    case "rates":
+      tableComponent = <RatesTable />;
+      break;
+    default:
+      tableComponent = null;
+  }
+
+  return <>{tableComponent}</>;
 };
 
 export default TableContainer;

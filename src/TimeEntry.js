@@ -6,13 +6,13 @@ import DataContext from "./context/DataContext";
 const TimeEntry = () => {
   const {
     projects,
-    setlogItems,
+    setLogItems,
     rates,
-    newlogItem,
+    newLogItem,
     logItems,
     setStatus,
     setFetchError,
-    setNewlogItem,
+    setNewLogItem,
     addNewProjectPop,
     addNewRatePop,
     api,
@@ -51,7 +51,7 @@ const TimeEntry = () => {
 
   const handleRateOptionChange = (event) => {
     const selectedValue = Number(event.target.value);
-    if (selectedValue === -2) {
+    if (selectedValue === "-2") {
       addNewRatePop();
     } else {
       const matchingRateIndex = rates.findIndex(
@@ -91,13 +91,13 @@ const TimeEntry = () => {
   }, [formDate, startTime, endTime]);
 
   useEffect(() => {
-    if (totalHours !== "" && currentRateIndex !== "-1") {
+    if (totalHours !== "" && currentRateIndex !== -1) {
       setTotalFee((totalHours * rates[currentRateIndex].rate).toFixed(2));
     }
   }, [totalHours, currentRateIndex]);
 
   useEffect(() => {
-    setNewlogItem({
+    setNewLogItem({
       project: projects[currentProjectIndex].name,
       details: details,
       client: projects[currentProjectIndex].client,
@@ -113,26 +113,18 @@ const TimeEntry = () => {
     finalEndTime,
   ]);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    handleSubmit(newlogItem);
-  };
-
-  const handleSubmit = (newlogItem) => {
-    if (!newlogItem) {
+    if (!newLogItem) {
       return;
     }
-    addlogItem(newlogItem);
-    setNewlogItem("");
-  };
-
-  const addlogItem = async () => {
-    const listlogItems = [...logItems, newlogItem];
-    setlogItems(listlogItems);
-    const result = await api("/log", "POST", newlogItem);
+    const listLogItems = [...logItems, newLogItem];
+    setLogItems(listLogItems);
+    const result = await api("/log", "POST", newLogItem);
     setStatus("Hours submitted");
     if (result) setFetchError(result);
     fetchData();
+    setNewLogItem("");
   };
 
   return (
@@ -209,9 +201,9 @@ const TimeEntry = () => {
           required
           name="descriptionBox"
           placeholder="Describe what was done."
-          defaultValue=""
           rows="4"
           cols="5"
+          value={details}
           onChange={handleDetailsChange}
         ></textarea>
 

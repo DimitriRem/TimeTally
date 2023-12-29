@@ -47,7 +47,7 @@ const AddNewClient = () => {
         <span>Add a Client</span>
       </div>
       <form onSubmit={handleAddClient} id="addClientForm">
-        <label htmlFor="ClientNameBox">Client Name:</label>
+        <label htmlFor="addClientName">Client Name:</label>
         <input
           type="text"
           id="addClientName"

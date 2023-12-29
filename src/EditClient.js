@@ -30,7 +30,7 @@ const EditClient = ({ name, id, setIsEditModalOpen }) => {
   }
 
   function updateClientInLog(name, updatedClientName, logItems) {
-    // Check if any entries match the current client name
+    // Check if any log entries match the current client name
     const entriesToUpdate = logItems.filter((entry) => entry.client === name);
 
     if (entriesToUpdate.length) {
@@ -53,7 +53,7 @@ const EditClient = ({ name, id, setIsEditModalOpen }) => {
   }
 
   function updateClientInProjects(name, updatedClientName, projects) {
-    // Check if any entries match the current client name
+    // Check if any project entries match the current client name
     const entriesToUpdate = projects.filter((entry) => entry.client === name);
 
     if (entriesToUpdate.length) {

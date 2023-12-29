@@ -64,7 +64,7 @@ const AddNewProject = () => {
     const result = await api("/projects", "POST", newProjectDetails);
     setStatus("new project added.");
     if (result) setFetchError(result);
-    fetchData();
+    await fetchData();
   };
 
   return (

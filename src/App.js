@@ -1,4 +1,3 @@
-import React from "react";
 import Header from "./Header";
 import Toolbox from "./Toolbox";
 import TableContainer from "./TableContainer";

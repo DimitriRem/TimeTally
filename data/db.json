@@ -207,6 +207,24 @@
       "startTime": "2023-12-13T07:00:00.000Z",
       "endTime": "2023-12-13T14:30:00.000Z",
       "id": 41
+    },
+    {
+      "project": "JayVay widget",
+      "details": "testing posting",
+      "client": "JayVay",
+      "rate": 10,
+      "startTime": "2023-12-29T07:00:00.000Z",
+      "endTime": "2023-12-29T15:00:00.000Z",
+      "id": 42
+    },
+    {
+      "project": "Acmecorp Email",
+      "details": "adfg",
+      "client": "Acmecorp",
+      "rate": "5",
+      "startTime": "2023-12-29T09:00:00.000Z",
+      "endTime": "2023-12-29T09:30:00.000Z",
+      "id": 43
     }
   ]
 }

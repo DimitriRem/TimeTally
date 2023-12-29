@@ -1,16 +1,17 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import DataContext from "./context/DataContext";
 
-const Header = () => {
-  const { status, setStatus } = useContext(DataContext);
-  const currentDate = new Date();
-  const dateOptions = {
-    weekday: "short",
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  };
+const dateOptions = {
+  weekday: "short",
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+};
 
+const Header = () => {
+  const dataContext = useContext(DataContext);
+  const { status, setStatus } = useMemo(() => dataContext, [dataContext]);
+  const currentDate = new Date();
   const date = currentDate.toLocaleDateString("en-UK", dateOptions);
   return (
     <header>
